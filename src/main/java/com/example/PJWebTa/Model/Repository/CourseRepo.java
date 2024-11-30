@@ -74,7 +74,7 @@ public class CourseRepo {
         }
 
         // GET COURSE BY ID
-        public Course getCourse(int ID) throws Exception {
+        public Course getCoursebyID(int ID) throws Exception {
                 Class.forName(BaseConnection.nameClass);
                 Connection con = DriverManager.getConnection(BaseConnection.url, BaseConnection.username,
                                 BaseConnection.password);

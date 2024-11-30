@@ -13,7 +13,7 @@ import com.example.PJWebTa.Model.Entity.User;
 
 public class UserRepo {
         // ADD USER (Signup)
-        public static void AddUsers(User user) throws Exception {
+        public static void addUsers(User user) throws Exception {
                 Class.forName(BaseConnection.nameClass);
                 Connection con = DriverManager.getConnection(BaseConnection.url, BaseConnection.username,
                                 BaseConnection.password);
@@ -34,7 +34,7 @@ public class UserRepo {
         }
 
         // UPDATE USER
-        public static void UpdateUsers(int userID, String userName, String userEmail, int userLevel,
+        public static void updateUsers(int userID, String userName, String userEmail, int userLevel,
                         Date userDateJoined, String userRole, int userType, String userPicture)
                         throws Exception {
                 Class.forName(BaseConnection.nameClass);
@@ -58,7 +58,7 @@ public class UserRepo {
       
 
         // SHOW ALL USER with All INFORMATION (ADMIN)
-        public ArrayList<User> ShowAllUsers() throws ClassNotFoundException, SQLException {
+        public ArrayList<User> showAllUsers() throws ClassNotFoundException, SQLException {
                 ArrayList<User> allUser = new ArrayList<>();
                 Class.forName(BaseConnection.nameClass);
                 Connection con = DriverManager.getConnection(BaseConnection.url, BaseConnection.username,
