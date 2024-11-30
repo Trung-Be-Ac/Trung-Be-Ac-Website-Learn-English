@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import com.example.PJWebTa.Model.Entity.User;
 
 public class UserRepo {
-        // ADD
+        // ADD USER (Signup)
         public static void AddUsers(User user) throws Exception {
                 Class.forName(BaseConnection.nameClass);
                 Connection con = DriverManager.getConnection(BaseConnection.url, BaseConnection.username,
@@ -55,20 +55,7 @@ public class UserRepo {
                 ps.close();
         }
 
-        // UPDATE PASSWORD
-        public static void UpdatePassword(String usernameA, String passwordA, int userID)
-                        throws ClassNotFoundException, SQLException {
-                Class.forName(BaseConnection.nameClass);
-                Connection con = DriverManager.getConnection(BaseConnection.url, BaseConnection.username,
-                                BaseConnection.password);
-                PreparedStatement ps = con.prepareStatement("update `user` set `password` = ? where user_id = ?;");
-                ps.setString(1, usernameA);
-                ps.setString(2, passwordA);
-                ps.setInt(3, userID);
-                ps.executeUpdate();
-                con.close();
-                ps.close();
-        }
+      
 
         // SHOW ALL USER with All INFORMATION (ADMIN)
         public ArrayList<User> ShowAllUsers() throws ClassNotFoundException, SQLException {
@@ -89,7 +76,7 @@ public class UserRepo {
                         String userPicture = rs.getString("user_picture");
                         String usernameA = rs.getString("username");
                         String passwordA = rs.getString("`password`");
-                        User user = new User(userID, userName, userEmail, userLevel, userDateJoined, userRole, userID,
+                        User user = new User(userID, userName, userEmail, userLevel, userDateJoined, userRole, userType,
                                         userPicture, usernameA, passwordA);
                         allUser.add(user);
                 }
@@ -99,7 +86,59 @@ public class UserRepo {
                 return allUser;
         }
 
-        // TÌM THEO TÊN 
-        public 
+        // GET USER BY ID
+        public User getUserbyID(int id) throws Exception {
+                Class.forName(BaseConnection.nameClass);
+                Connection con = DriverManager.getConnection(BaseConnection.url, BaseConnection.username,
+                                BaseConnection.password);
+                PreparedStatement ps = con.prepareStatement(
+                                "select * from `user` where user_id = ?;");
+                ps.setInt(1, id);
+                ResultSet rs = ps.executeQuery();
+                rs.next();
+                int userID = rs.getInt("user_id");
+                String userName = rs.getString("user_name");
+                String userEmail = rs.getString("user_email");
+                int userLevel = rs.getInt("user_level");
+                Date userDateJoined = rs.getDate("user_datejoined");
+                String userRole = rs.getString("user_role");
+                int userType = rs.getInt("user_type");
+                String userPicture = rs.getString("user_picture");
+                String usernameA = rs.getString("username");
+                String passwordA = rs.getString("`password`");
+                User user = new User(userID, userName, userEmail, userLevel, userDateJoined, userRole, userType,
+                                userPicture, usernameA, passwordA);
+                ps.close();
+                rs.close();
+                con.close();
+                return user;
+        }
+
+        // SEARCH BY NAME
+        public static User getUserbyName(String name) throws ClassNotFoundException, SQLException {
+                Class.forName(BaseConnection.nameClass);
+                Connection con = DriverManager.getConnection(BaseConnection.url, BaseConnection.username,
+                                BaseConnection.password);
+                PreparedStatement ps = con.prepareStatement("select * from `user` where user_name = ?");
+                ps.setString(1, name);
+                ResultSet rs = ps.executeQuery();
+                rs.next();
+                int userID = rs.getInt("user_id");
+                String userName = rs.getString("user_name");
+                String userEmail = rs.getString("user_email");
+                int userLevel = rs.getInt("user_level");
+                Date userDateJoined = rs.getDate("user_datejoined");
+                String userRole = rs.getString("user_role");
+                int userType = rs.getInt("user_type");
+                String userPicture = rs.getString("user_picture");
+                String usernameA = rs.getString("username");
+                String passwordA = rs.getString("`password`");
+                User user = new User(userID, userName, userEmail, userLevel, userDateJoined, userRole, userType,
+                                userPicture, usernameA, passwordA);
+                con.close();
+                rs.close();
+                ps.close();
+                return user;
+        }
 
 }

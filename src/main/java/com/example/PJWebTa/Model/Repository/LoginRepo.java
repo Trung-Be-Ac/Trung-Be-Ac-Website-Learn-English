@@ -11,7 +11,8 @@ import java.util.ArrayList;
 import com.example.PJWebTa.Model.Entity.User;
 
 public class LoginRepo {
-    public static ArrayList<User> CheckLogin(String usernameA, String passwordA) throws SQLException, ClassNotFoundException {
+    public static ArrayList<User> CheckLogin(String usernameA, String passwordA)
+            throws SQLException, ClassNotFoundException {
         ArrayList<User> allUsers = new ArrayList<>();
         Class.forName(BaseConnection.nameClass);
         Connection con = DriverManager.getConnection(BaseConnection.url, BaseConnection.username,
@@ -30,7 +31,8 @@ public class LoginRepo {
             Date userDateJoined = rs.getDate("user_datejoined");
             int userType = rs.getInt("user_type");
             String userPicture = rs.getString("user_picture");
-            User user = new User(userID, userName, userEmail, userLevel, userDateJoined, userRole, userType, userPicture, usernameA, passwordA);
+            User user = new User(userID, userName, userEmail, userLevel, userDateJoined, userRole, userType,
+                    userPicture, usernameA, passwordA);
             allUsers.add(user);
 
         }
@@ -38,5 +40,20 @@ public class LoginRepo {
         rs.close();
         ps.close();
         return allUsers;
+    }
+
+    // UPDATE PASSWORD
+    public static void UpdatePassword(String usernameA, String passwordA, int userID)
+            throws ClassNotFoundException, SQLException {
+        Class.forName(BaseConnection.nameClass);
+        Connection con = DriverManager.getConnection(BaseConnection.url, BaseConnection.username,
+                BaseConnection.password);
+        PreparedStatement ps = con.prepareStatement("update `user` set `password` = ? where user_id = ?;");
+        ps.setString(1, usernameA);
+        ps.setString(2, passwordA);
+        ps.setInt(3, userID);
+        ps.executeUpdate();
+        con.close();
+        ps.close();
     }
 }

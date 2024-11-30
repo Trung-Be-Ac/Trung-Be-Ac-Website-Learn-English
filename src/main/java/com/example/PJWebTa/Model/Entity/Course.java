@@ -13,4 +13,5 @@ public class Course
     private String courseName;
     private int courseLevel;
     private String courseDescription;
+    private User user;
 }

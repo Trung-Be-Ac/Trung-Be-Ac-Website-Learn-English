@@ -18,8 +18,12 @@ public class User {
     private Date userDateJoined;
     private String userRole;
     private int user_type;
-    //0. banUser 1. Normal 2.Premium
+    //0. Ban 1. Normal 2.Premium
     private String userPicture;
     private String usernameA;
     private String passwordA;
+
+    public User(int userID) {
+        this.userID = userID;
+    }
 }
