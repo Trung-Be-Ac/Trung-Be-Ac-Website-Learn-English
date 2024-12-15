@@ -12,6 +12,7 @@ import lombok.*;
 
 public class Test {
     private int testID;
+    private String testName;
     private Quiz quiz;
     private Lesson lesson;
     private String testQuestionType;

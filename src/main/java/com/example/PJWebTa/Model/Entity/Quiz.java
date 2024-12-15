@@ -9,7 +9,7 @@ import lombok.*;
 
 public class Quiz {
     private int quizID;
-    private String quizTiltle;
+    private String quizTitle;
     private String quizText;
     private String quizCorrectanswer;
     private String quizA;

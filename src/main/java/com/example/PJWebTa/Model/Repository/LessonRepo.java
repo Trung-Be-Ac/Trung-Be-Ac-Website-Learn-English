@@ -101,7 +101,7 @@ public class LessonRepo {
         return lesson;
     }
     // GET LESSON BY NAME
-    public Lesson getLessonbyID(String name) throws Exception {
+    public Lesson getLessonbyName(String name) throws Exception {
         Class.forName(BaseConnection.nameClass);
         Connection con = DriverManager.getConnection(BaseConnection.url, BaseConnection.username,
                 BaseConnection.password);
