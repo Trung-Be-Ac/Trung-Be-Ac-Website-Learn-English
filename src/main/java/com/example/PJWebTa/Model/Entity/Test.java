@@ -13,7 +13,7 @@ import lombok.*;
 public class Test {
     private int testID;
     private String testName;
-    private Quiz quiz;
+    private QuizTest quiztTest;
     private Lesson lesson;
     private String testQuestionType;
     private LocalTime testTime;

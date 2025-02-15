@@ -9,8 +9,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import com.example.PJWebTa.Model.Entity.User;
+import org.springframework.stereotype.Repository;
 
+import com.example.PJWebTa.Model.Entity.User;
+@Repository
 public class UserRepo {
         // ADD USER (Signup)
         public static void addUsers(User user) throws Exception {
@@ -75,7 +77,7 @@ public class UserRepo {
                         int userType = rs.getInt("user_type");
                         String userPicture = rs.getString("user_picture");
                         String usernameA = rs.getString("username");
-                        String passwordA = rs.getString("`password`");
+                        String passwordA = rs.getString("password");
                         User user = new User(userID, userName, userEmail, userLevel, userDateJoined, userRole, userType,
                                         userPicture, usernameA, passwordA);
                         allUser.add(user);
@@ -105,7 +107,7 @@ public class UserRepo {
                 int userType = rs.getInt("user_type");
                 String userPicture = rs.getString("user_picture");
                 String usernameA = rs.getString("username");
-                String passwordA = rs.getString("`password`");
+                String passwordA = rs.getString("password");
                 User user = new User(userID, userName, userEmail, userLevel, userDateJoined, userRole, userType,
                                 userPicture, usernameA, passwordA);
                 ps.close();
@@ -132,7 +134,7 @@ public class UserRepo {
                 int userType = rs.getInt("user_type");
                 String userPicture = rs.getString("user_picture");
                 String usernameA = rs.getString("username");
-                String passwordA = rs.getString("`password`");
+                String passwordA = rs.getString("password");
                 User user = new User(userID, userName, userEmail, userLevel, userDateJoined, userRole, userType,
                                 userPicture, usernameA, passwordA);
                 con.close();

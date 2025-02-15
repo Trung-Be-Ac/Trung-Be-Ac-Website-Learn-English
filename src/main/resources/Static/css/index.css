@@ -1,0 +1,129 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.banner {
+    background-color: #231A80;
+    text-align: center;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: aliceblue;
+}
+
+.hero-section {
+    background-color: #d6f8e3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    position: relative;
+}
+
+.hero-text {
+    max-width: 600px;
+    text-align: left;
+}
+
+.hero-text h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.hero-text p {
+    margin-top: 20px;
+    font-size: 1rem;
+}
+
+.hero-img {
+    max-width: 300px;
+    border-radius: 50%;
+}
+
+.navbar-nav .nav-link {
+    color: #000000;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #333333;
+}
+
+
+.btn-outline-primary {
+    border-color: #231A80;
+    color: #231A80;
+}
+
+.btn-outline-primary:hover {
+    background-color: #231A80;
+    color: white;
+}
+
+.btn-primary {
+    background-color: #231A80;
+    border-color: #231A80;
+}
+
+.btn-primary:hover {
+    background-color: #1a1370;
+    border-color: #1a1370;
+}
+.btn-secondary {
+    background-color: #000000;
+    border-color: #000000;
+}
+
+.btn-secondary:hover {
+    background-color: #333333;
+    border-color: #333333;
+}
+
+
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: black;
+}
+
+.carousel-button.left {
+    left: 20px;
+}
+
+.carousel-button.right {
+    right: 20px;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+}
+.navbar-nav {
+    margin-left: 100px; 
+}
+
+.navbar-brand img {
+    max-height: 40px;
+    margin-right: 10px;
+}
+
+.form-control {
+    border-radius: 20px;
+    width: 300px;
+}
+hero-section
+.user-icon {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-icon img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+}

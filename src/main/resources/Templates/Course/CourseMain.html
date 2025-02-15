@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+    
+    <div>
+        <form action="@{/getCourseByName}" method="post">
+            <input type="text" name="searchNameCourse" placeholder="Search Course">
+            <button type="submit">Search</button>
+        </form>
+
+        <div >
+            <a th:href="@{/PageCreateCourse}">Create Course</a>
+        </div>
+        <table border="2px">
+            <tr>
+                <td>Course ID</td>
+                <td>Course name</td>
+                <td>Course Level</td>
+                <td>Course Description</td>
+                <td>Total Lesson</td>
+                <td>Finish Lesson</td>
+                <td>Process</td>
+                <td>Create By</td>
+                <td>View Course</td>
+                <td >Edit Course</td>
+            </tr>
+            <tr th:each="Course : ${AllCourses}">
+                <td th:text="${Course.courseID}"></td>
+                <td th:text="${Course.courseName}"></td>
+                <td th:text="${Course.courseLevel}"></td>
+                <td th:text="${Course.courseDescription}"></td>
+                <td th:text="${Course.courseTotallessons}"></td>
+                <td th:text="${Course.courseFinishlesson}"></td>
+                <td th:text="${Course.courseProcess}"></td>
+                <td th:text="${Course.user.userName}"></td>
+                <td><a th:href="@{/CourseDetail/{courseID}(courseID=${Course.courseID})}">Details</a></td>
+                <td >
+                    <a th:href="@{/EditCourse/{courseID}(courseID=${Course.courseID})}">Edit Course</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

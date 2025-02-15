@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AceYourEnglish - Sign up</title>
+</head>
+
+<body>
+    <h3>Here is a Sign up Page</h3>
+    <form th:action="@{/inputSignup}" method="post">
+        <div>
+            <input type="text" name="name" placeholder="Your Name">
+        </div>
+        <div>
+            <input type="text" name="username" placeholder="Username">
+        </div>
+        <input type="text" name="password" placeholder="Password">
+        </div>
+        <div>
+            <input type="text" name="cpassword" placeholder="Confirm Password">
+        </div>
+        <div>
+            <input type="text" name="email" placeholder="Email">
+        </div>
+        <div>
+            <select name="role">
+                <option value="Student">Student</option>
+                <option value="Teacher">Teacher</option>
+            </select>
+        </div>
+        <button type="submit">Signup</button>
+    </form>
+</body>
+</html>

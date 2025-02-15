@@ -62,15 +62,18 @@ public class CourseRepo {
                         String courseName = rs.getString("course_name");
                         int courseLevel = rs.getInt("course_level");
                         String courseDescription = rs.getString("course_description");
+                        int courseTotallessons = rs.getInt("course_totallesson");
+                        int courseFinishlesson = rs.getInt("course_finishlesson");
+                        double courseProcess = rs.getDouble("course_process");
                         User userID = userRepo.getUserbyID(rs.getInt("user_id"));
-                        Course course = new Course(courseID, courseName, courseLevel, courseDescription, userID);
+                        Course course = new Course(courseID, courseName, courseLevel, courseDescription,
+                                        courseTotallessons, courseFinishlesson, courseProcess, userID);
                         allCourse.add(course);
                 }
                 con.close();
                 ps.close();
                 rs.close();
                 return allCourse;
-
         }
 
         // GET COURSE BY ID
@@ -86,13 +89,34 @@ public class CourseRepo {
                 String courseName = rs.getString("course_name");
                 int courseLevel = rs.getInt("course_level");
                 String courseDescription = rs.getString("course_description");
+                int courseTotallessons = rs.getInt("course_totallesson");
+                int courseFinishlesson = rs.getInt("course_finishlesson");
+                double courseProcess = rs.getDouble("course_process");
                 User userID = userRepo.getUserbyID(rs.getInt("user_id"));
-                Course course = new Course(courseID, courseName, courseLevel, courseDescription, userID);
+                Course course = new Course(courseID, courseName, courseLevel, courseDescription, courseTotallessons,
+                                courseFinishlesson, courseProcess, userID);
                 con.close();
                 ps.close();
                 rs.close();
                 return course;
 
+        }
+
+        // Update Course
+        public static void updateCourse(Course course) throws Exception {
+                Class.forName(BaseConnection.nameClass);
+                Connection con = DriverManager.getConnection(BaseConnection.url, BaseConnection.username,
+                                BaseConnection.password);
+                PreparedStatement ps = con.prepareStatement(
+                                "update course set course_name = ?, course_level = ?, course_description = ?, course_totallesson = ? where course_id = ?;");
+                ps.setString(1, course.getCourseName());
+                ps.setInt(2, course.getCourseLevel());
+                ps.setString(3, course.getCourseDescription());
+                ps.setInt(4, course.getCourseTotallessons());
+                ps.setInt(5, course.getCourseID());
+                ps.executeUpdate();
+                ps.close();
+                con.close();
         }
 
         // SEARCH BY NAME COURSE
@@ -109,11 +133,58 @@ public class CourseRepo {
                 String courseName = rs.getString("course_name");
                 int courseLevel = rs.getInt("course_level");
                 String courseDescription = rs.getString("course_description");
+                int courseTotallessons = rs.getInt("course_totallessons");
+                int courseFinishlesson = rs.getInt("course_finishlesson");
+                double courseProcess = rs.getDouble("course_process");
                 User userID = userRepo.getUserbyID(rs.getInt("user_id"));
-                Course course = new Course(courseID, courseName, courseLevel, courseDescription, userID);
+                Course course = new Course(courseID, courseName, courseLevel, courseDescription, courseTotallessons,
+                                courseFinishlesson, courseProcess, userID);
                 con.close();
                 ps.close();
                 rs.close();
                 return course;
         }
+
+        // Cập nhật tổng số bài học trong khóa học.
+        public void updateTotalLessons(int courseId) throws Exception {
+                Class.forName(BaseConnection.nameClass);
+                try (Connection con = DriverManager.getConnection(BaseConnection.url, BaseConnection.username,
+                                BaseConnection.password);
+                                PreparedStatement ps = con.prepareStatement(
+                                                "UPDATE course SET course_totallessons = (SELECT COUNT(*) FROM lesson WHERE lesson.course_id = course.course_id) WHERE course_id = ?;")) {
+                        ps.setInt(1, courseId);
+                        ps.executeUpdate();
+                }
+        }
+
+        // Cập nhật số bài học đã hoàn thành trong khóa học.
+        public void updateFinishedLessons(int courseId) throws Exception {
+                Class.forName(BaseConnection.nameClass);
+                try (Connection con = DriverManager.getConnection(BaseConnection.url, BaseConnection.username,
+                                BaseConnection.password);
+                                PreparedStatement ps = con.prepareStatement(
+                                                "UPDATE course SET course_finished_lessons = (SELECT COUNT(*) FROM lesson WHERE lesson.course_id = course.course_id AND lesson.lesson_status = 1) WHERE course_id = ?;")) {
+                        ps.setInt(1, courseId);
+                        ps.executeUpdate();
+                }
+        }
+
+        // Cập nhật tiến trình khóa học.
+        public void updateCourseProcess(int courseId) throws Exception {
+                Class.forName(BaseConnection.nameClass);
+                try (Connection con = DriverManager.getConnection(BaseConnection.url, BaseConnection.username,
+                                BaseConnection.password);
+                                PreparedStatement ps = con.prepareStatement(
+                                                "UPDATE course SET course_process = (" +
+                                                                "  CASE " +
+                                                                "    WHEN course_totallessons = 0 THEN 0 " +
+                                                                "    ELSE (course_finished_lessons * 1.0 / course_totallessons) * 100 "
+                                                                +
+                                                                "  END) " +
+                                                                "WHERE course_id = ?;")) {
+                        ps.setInt(1, courseId);
+                        ps.executeUpdate();
+                }
+        }
+
 }

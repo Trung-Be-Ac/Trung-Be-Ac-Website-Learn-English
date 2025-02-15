@@ -12,15 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.example.PJWebTa.Model.Entity.Lesson;
-import com.example.PJWebTa.Model.Entity.Quiz;
+import com.example.PJWebTa.Model.Entity.QuizTest;
 import com.example.PJWebTa.Model.Entity.Test;
 
 @Repository
 public class TestRepo {
-        @Autowired
-        Quiz quiz = new Quiz();
-        @Autowired
-        Lesson lesson = new Lesson();
         @Autowired
         QuizRepo quizRepo = new QuizRepo();
         LessonRepo lessonRepo = new LessonRepo();
@@ -32,7 +28,7 @@ public class TestRepo {
                                 BaseConnection.password);
                 PreparedStatement ps = con.prepareStatement(
                                 "insert into test (test_name,quiz_id,lesson_id,test_questiontype,test_timelimit) values (?,?,?,?,?)");
-                ps.setInt(1, test.getQuiz().getQuizID());
+                ps.setInt(1, test.getQuiztTest().getQuizID());
                 ps.setString(2, test.getTestName());
                 ps.setInt(3, test.getLesson().getLessonID());
                 ps.setString(4, test.getTestQuestionType());
@@ -56,7 +52,7 @@ public class TestRepo {
         }
 
         // Update
-        public static void UpdateTest(String testName, Quiz quizID, Lesson lessonID, String testQuestiontype,
+        public static void UpdateTest(String testName, QuizTest quizID, Lesson lessonID, String testQuestiontype,
                         LocalTime testTime,
                         int testID)
                         throws Exception {
@@ -87,7 +83,7 @@ public class TestRepo {
                 while (rs.next()) {
                         int testID = rs.getInt("test_id");
                         String testName = rs.getString("testName");
-                        Quiz quizID = quizRepo.getQuizByID(rs.getInt("quiz_id"));
+                        QuizTest quizID = quizRepo.getQuizByID(rs.getInt("quiz_id"));
                         Lesson lessonID = lessonRepo.getLessonbyID(testID);
                         String testQuestiontype = rs.getString("test_questiontype");
                         LocalTime testTime = rs.getTime("test_time").toLocalTime();
@@ -111,7 +107,7 @@ public class TestRepo {
                 rs.next();
                 int testID = rs.getInt("test_id");
                 String testName = rs.getString("testName");
-                Quiz quizID = quizRepo.getQuizByID(rs.getInt("quiz_id"));
+                QuizTest quizID = quizRepo.getQuizByID(rs.getInt("quiz_id"));
                 Lesson lessonID = lessonRepo.getLessonbyID(testID);
                 String testQuestiontype = rs.getString("test_questiontype");
                 LocalTime testTime = rs.getTime("test_time").toLocalTime();
@@ -133,7 +129,7 @@ public class TestRepo {
                 rs.next();
                 int testID = rs.getInt("test_id");
                 String testName = rs.getString("testName");
-                Quiz quizID = quizRepo.getQuizByID(rs.getInt("quiz_id"));
+                QuizTest quizID = quizRepo.getQuizByID(rs.getInt("quiz_id"));
                 Lesson lessonID = lessonRepo.getLessonbyID(testID);
                 String testQuestiontype = rs.getString("test_questiontype");
                 LocalTime testTime = rs.getTime("test_time").toLocalTime();

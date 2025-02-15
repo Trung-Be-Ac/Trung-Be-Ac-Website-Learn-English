@@ -1,13 +1,16 @@
 package com.example.PJWebTa.Model.Entity;
-import lombok.*;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
 
-public class Quiz {
+public class QuizTest {   
     private int quizID;
     private String quizTitle;
     private String quizText;

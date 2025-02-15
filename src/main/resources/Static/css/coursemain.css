@@ -1,0 +1,90 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+/* Banner */
+.banner {
+    background-color: #231A80;
+    text-align: center;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: aliceblue;
+}
+
+/* Table */
+table th, table td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.table {
+    margin-top: 20px;
+    border-radius: 10px;
+}
+
+.table-bordered {
+    border: 1px solid #ddd;
+}
+
+.table-striped tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+/* Button Styles */
+.btn-primary {
+    background-color: #231A80;
+    border-color: #231A80;
+}
+
+.btn-primary:hover {
+    background-color: #1a1370;
+    border-color: #1a1370;
+}
+
+.btn-warning {
+    background-color: #f0ad4e;
+    border-color: #f0ad4e;
+}
+
+.btn-warning:hover {
+    background-color: #ec971f;
+    border-color: #d58512;
+}
+
+/* Form */
+.input-group {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form-control {
+    border-radius: 20px;
+    width: 400px;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-nav .nav-link {
+    color: #000;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #333;
+}
+
+.user-icon {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-icon img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+}

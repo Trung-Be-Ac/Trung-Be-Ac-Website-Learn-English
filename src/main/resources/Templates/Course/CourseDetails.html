@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>Details Course</div>
+    
+    <h1>Course Details</h1>
+    <table border="2">
+        <tr>
+            <td>Course Name</td>
+            <td>Course Level</td>
+            <td>Course Description</td>
+            <td>Total Lessons</td>
+            <td>Lesson Finish</td>
+            <td>Learn Process</td>
+            <td>Create By</td>
+        </tr>
+        <td th:text="${CourseDetails.courseName}"></td>
+        <td th:text="${CourseDetails.courseLevel}"></td>
+        <td th:text="${CourseDetails.courseDescription}"></td>
+        <td th:text="${CourseDetails.courseTotallessons}"></td>
+        <td th:text="${CourseDetails.courseFinishlesson}"></td>
+        <td th:text="${CourseDetails.courseProcess}"></td>
+        <td th:text="${CourseDetails.user.userName}"></td>
+    </table>
+
+    <h2>Lessons</h2>
+    <table border="1">
+            <tr>
+                <th>Lesson ID</th>
+                <th>Lesson Name</th>
+                <th>Description</th>    
+                <th>Created By</th>
+                <th>View</th>
+                <th>Edit</th>
+            </tr>
+            <tr th:each="Lesson : ${AllLessons}" th:if="${Lesson.course.courseID == CourseDetails.courseID}">
+                <td th:text="${Lesson.lessonID}"></td>
+                <td th:text="${Lesson.lessonName}"></td>
+                <td th:text="${Lesson.lessonDescription}"></td>
+                <td th:text="${Lesson.user.userName}"></td>
+                <td><a th:href="@{/LessonDetail/{lessonID}(lessonID=${Lesson.lessonID})}">View</a></td>
+                <td><a th:href="@{/EditLesson/{lessonID}(lessonID=${Lesson.lessonID})}">Edit</a></td>
+            </tr>
+    </table>
+
+</body>
+</html> 

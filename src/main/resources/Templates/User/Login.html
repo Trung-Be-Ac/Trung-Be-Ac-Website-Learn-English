@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AceYourEnglish - Login</title>
+</head>
+<body>
+    <h3>Here is a Login Page</h3>
+    <form th:action="@{/inputLogin}" method="post">
+        <div>
+            <input type="text" name="username" placeholder="Username">
+        </div>
+        <div>
+            <input type="text" name="password" placeholder="Password">
+        </div>
+        <button type="submit">Login</button>
+    </form>
+    
+</body>
+</html>
