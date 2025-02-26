@@ -32,54 +32,67 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link"
-                            th:href="@{/Course/CourseMain}">Explore</a>
+                        <a class="nav-link" th:href="@{/Course}">Explore</a>
                     </li>
                 </ul>
-                <form class="d-flex">
-                    <form action="/getCourseByName" method="post">
-                        <input type="text" name="searchNameCourse" placeholder="Search Course">
-                        <button type="submit">Search</button>
-                    </form>                    
-                </form>
+                <div th:if = "${session.LoginSuccess != null}">
+                    Wellcome Back <span th:test="${session.LoginSuccess.userName}"></span>
+                </div>
+
                 <div class="d-flex align-items-center">
                     <div th:if="${session.LoginSuccess == null}">
                         <a class="btn btn-outline-primary mx-2" th:href="@{/Login}">Log in</a>
                         <a class="btn btn-primary mx-2" th:href="@{/Signup}">Sign up</a>
                     </div>
+                    <!-- Contact Us -->
                     <a class="btn btn-secondary mx-2" th:href="@{/ContactUs}" target="_blank">Contact Us</a>
+
+                    <!-- Profile User -->
                     <div th:if="${session.LoginSuccess != null}" class="user-icon">
-                        <a th:href="@{/UserProfile}">
+                        <a th:href="@{/UserProfile/{userID}(userID=${session.LoginSuccess.userID})}" target="blank">
                             <img src="https://via.placeholder.com/40" alt="User">
                         </a>
                     </div>
+
+                    <a th:if="${session.LoginSuccess != null}" th:href="@{/Logout}">Logout</a>
                 </div>
             </div>
         </div>
     </nav>
 
     <!-- Carousel -->
-    <div id="carouselExample" class="carousel slide">
+    <div id="customCarousel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img src="..." class="d-block w-100" alt="...">
+                <div class="position-relative">
+                    <img src="https://img-c.udemycdn.com/notices/web_carousel_slide/image/e6cc1a30-2dec-4dc5-b0f2-c5b656909d5b.jpg" class="img-fluid w-100" alt="...">
+                    <div class="carousel-text position-absolute top-50 start-0 translate-middle-y ms-5 p-4 bg-white shadow rounded">
+                        <h1 class="fw-bold">Học tập giúp bạn</h1>
+                        <p class="mb-0">Kỹ năng cho hiện tại (và tương lai) của bạn. Hãy bắt đầu cùng chúng tôi.</p>
+                    </div>
+                </div>
             </div>
             <div class="carousel-item">
-                <img src="..." class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="..." class="d-block w-100" alt="...">
+                <div class="position-relative">
+                    <img src="https://img-c.udemycdn.com/notices/web_carousel_slide/image/10ca89f6-811b-400e-983b-32c5cd76725a.jpg" class="img-fluid w-100" alt="...">
+                    <div class="carousel-text position-absolute top-50 start-0 translate-middle-y ms-5 p-4 bg-white shadow rounded">
+                        <h1 class="fw-bold">Khám phá cơ hội</h1>
+                        <p class="mb-0">Tìm kiếm các khóa học phù hợp với nhu cầu của bạn</p>
+                        <p>để đạt được mục tiêu và duy trì khả năng cạnh tranh.</p>
+                    </div>
+                </div>
             </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+        <button class="carousel-control-prev" type="button" data-bs-target="#customCarousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+        <button class="carousel-control-next" type="button" data-bs-target="#customCarousel" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
         </button>
     </div>
+    
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

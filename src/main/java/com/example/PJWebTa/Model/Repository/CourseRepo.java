@@ -31,6 +31,7 @@ public class CourseRepo {
                 ps.setString(3, course.getCourseDescription());
                 ps.setInt(4, course.getUser().getUserID());
                 ps.executeUpdate();
+                con.close();
                 ps.close();
 
         }

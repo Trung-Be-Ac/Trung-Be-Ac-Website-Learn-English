@@ -47,15 +47,17 @@ public class CourseController {
 
     // Create Course
     @GetMapping("/CreateCourse")
-    public String pageCreateCourse() {
+    public String pageCreateCourse(Model model) throws Exception {
+        ArrayList <Course> courseList =courseRepo.Viewallcourse();
+        model.addAttribute("CourseList", courseList);
         return "/Course/CreateCourse";
     }
 
     @PostMapping("/createCourse")
     public String CreateCourse(@RequestParam("courseName") String name, @RequestParam("courseLevel") int level,
             @RequestParam("coureDescription") String description, HttpSession httpSession) throws Exception {
-        User userIDCreate = (User) httpSession.getAttribute("LoginSuccess");
-        Course course = new Course(0, name, level, description, 0, 0, 0.0, userIDCreate);
+        User user = (User) httpSession.getAttribute("LoginSuccess");
+        Course course = new Course(0, name, level, description, 0, 0, 0.0, user);
         courseRepo.AddCourse(course);
         return "redirect:/Course";
 
@@ -76,7 +78,7 @@ public class CourseController {
         return "/Course/CourseMain";
     }
 
-    // Edit Course
+    //  Update Course
     @GetMapping("/EditCourse/{courseID}")
     public String EditCourse(Model model, @PathVariable("courseID") int courseID) throws Exception {
         Course course = courseRepo.getCoursebyID(courseID);
@@ -91,7 +93,7 @@ public class CourseController {
             @RequestParam("courseTotallesson") int courseTotallesson) throws Exception {
         Course course = new Course(courseID, courseName, courseLevel, courseDescription, courseTotallesson);
         courseRepo.updateCourse(course);
-        return "redirect/Course/CourseMain";
+        return "redirect:/Course";
 
     }
 

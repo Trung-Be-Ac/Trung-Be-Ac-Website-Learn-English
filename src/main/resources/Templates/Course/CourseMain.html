@@ -10,19 +10,18 @@
 </head>
 
 <body>
-    
+
     <div>
         <form action="@{/getCourseByName}" method="post">
             <input type="text" name="searchNameCourse" placeholder="Search Course">
             <button type="submit">Search</button>
         </form>
 
-        <div >
-            <a th:href="@{/PageCreateCourse}">Create Course</a>
+        <div>
+            <a th:href="@{/CreateCourse}">Create Course</a>
         </div>
         <table border="2px">
             <tr>
-                <td>Course ID</td>
                 <td>Course name</td>
                 <td>Course Level</td>
                 <td>Course Description</td>
@@ -31,10 +30,10 @@
                 <td>Process</td>
                 <td>Create By</td>
                 <td>View Course</td>
-                <td >Edit Course</td>
+                <td>Edit Course</td>
             </tr>
             <tr th:each="Course : ${AllCourses}">
-                <td th:text="${Course.courseID}"></td>
+                <td th:text="${Course.courseID}" style="display: none;"></td>
                 <td th:text="${Course.courseName}"></td>
                 <td th:text="${Course.courseLevel}"></td>
                 <td th:text="${Course.courseDescription}"></td>
@@ -43,8 +42,9 @@
                 <td th:text="${Course.courseProcess}"></td>
                 <td th:text="${Course.user.userName}"></td>
                 <td><a th:href="@{/CourseDetail/{courseID}(courseID=${Course.courseID})}">Details</a></td>
-                <td >
-                    <a th:href="@{/EditCourse/{courseID}(courseID=${Course.courseID})}">Edit Course</a>
+                <td>
+                    <a th:if="${session.LoginSuccess !=null and session.LoginSuccess.userRole == 'Teacher'}"
+                        th:href="@{/EditCourse/{courseID}(courseID=${Course.courseID})}">Edit Course</a>
                 </td>
             </tr>
         </table>

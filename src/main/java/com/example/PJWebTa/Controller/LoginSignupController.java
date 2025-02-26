@@ -46,13 +46,13 @@ public class LoginSignupController {
     @GetMapping("/Logout")
     public String logOut(HttpSession httpSession) {
         httpSession.removeAttribute("LoginSuccess");
-        return "redirect:/Index";
+        return "redirect:/";
     }
 
     // Signup
     @GetMapping("/Signup")
     public String signUp() {
-        return "/User/Signup";
+        return "User/Signup";
     }
 
     @PostMapping("/inputSignup")
@@ -99,7 +99,7 @@ public class LoginSignupController {
 
         loginRepo.UpdatePassword(userID, newPassword);
         model.addAttribute("Success", "Thay đổi mật khẩu thành công.");
-        return "redirect:/Index";
+        return "redirect:/";
     }
 
 }

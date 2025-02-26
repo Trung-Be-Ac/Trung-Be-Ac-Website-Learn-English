@@ -48,7 +48,6 @@ body {
     color: #333333;
 }
 
-
 .btn-outline-primary {
     border-color: #231A80;
     color: #231A80;
@@ -68,6 +67,7 @@ body {
     background-color: #1a1370;
     border-color: #1a1370;
 }
+
 .btn-secondary {
     background-color: #000000;
     border-color: #000000;
@@ -77,7 +77,6 @@ body {
     background-color: #333333;
     border-color: #333333;
 }
-
 
 .carousel-button {
     position: absolute;
@@ -101,6 +100,7 @@ body {
     display: flex;
     align-items: center;
 }
+
 .navbar-nav {
     margin-left: 100px; 
 }
@@ -114,7 +114,7 @@ body {
     border-radius: 20px;
     width: 300px;
 }
-hero-section
+
 .user-icon {
     display: flex;
     align-items: center;
@@ -126,4 +126,33 @@ hero-section
     height: 40px;
     border-radius: 50%;
     border: 2px solid #ccc;
+}
+
+/* CAROUSEL */
+.carousel-control-prev, .carousel-control-next {
+    top: 50%;
+    width: 50px;
+    height: 50px;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    filter: invert(15%) sepia(8%) saturate(300%) brightness(10%);
+    width: 20px;
+    height: 20px;
+}
+
+.carousel-control-prev {
+    left: 20px;
+}
+
+.carousel-control-next {
+    right: 20px;
 }
