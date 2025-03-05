@@ -48,7 +48,7 @@
                 <td th:text="${Lesson.lessonDescription}"></td>
                 <td th:text="${Lesson.user.userName}"></td>
                 <td><a th:href="@{/LessonDetail/{lessonID}(lessonID=${Lesson.lessonID})}">View</a></td>
-                <td><a th:href="@{/EditLesson/{lessonID}(lessonID=${Lesson.lessonID})}">Edit</a></td>
+                <td><a th:href="@{/EditLesson/{lessonID}(lessonID=${Lesson.lessonID})/}">Edit</a></td>
             </tr>
     </table>
 

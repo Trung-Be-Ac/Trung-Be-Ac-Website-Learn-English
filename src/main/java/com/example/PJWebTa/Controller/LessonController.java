@@ -55,6 +55,12 @@ public class LessonController {
         return "redirect:/CourseDetail/{courseID}";
     }
 
+    // View Detail
+    @GetMapping("/LessonDetail/{lessonID}")
+    public String lessonDeatil() {
+        return "Lesson/LessonDetails";
+    }
+
     // Edit Lesson
     @GetMapping("/EditLesson/{lessonID}")
     public String editLessonPage(@PathVariable("lessonID") int lessonID, Model model) throws Exception {
