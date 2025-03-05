@@ -12,12 +12,12 @@
 <body>
 
     <div>
-        <form action="@{/getCourseByName}" method="post">
-            <input type="text" name="searchNameCourse" placeholder="Search Course">
+        <form th:action="@{/getCourseByName}" method="post">
+            <input type="text" name="searchNameCourse" placeholder="Search Course By Name ">
             <button type="submit">Search</button>
         </form>
-
         <div>
+
             <a th:href="@{/CreateCourse}">Create Course</a>
         </div>
         <table border="2px">
@@ -41,7 +41,8 @@
                 <td th:text="${Course.courseFinishlesson}"></td>
                 <td th:text="${Course.courseProcess}"></td>
                 <td th:text="${Course.user.userName}"></td>
-                <td><a th:href="@{/CourseDetail/{courseID}(courseID=${Course.courseID})}">Details</a></td>
+                <td th:if="${session.LoginSuccess !=null and session.LoginSuccess.userRole == 'Teacher'}"><a
+                        th:href="@{/CourseDetail/{courseID}(courseID=${Course.courseID})}">Details</a></td>
                 <td>
                     <a th:if="${session.LoginSuccess !=null and session.LoginSuccess.userRole == 'Teacher'}"
                         th:href="@{/EditCourse/{courseID}(courseID=${Course.courseID})}">Edit Course</a>

@@ -42,7 +42,6 @@ public class CourseController {
         model.addAttribute("AllLessons", allLessons);
         model.addAttribute("CourseDetails", course);
         return "Course/CourseDetails";
-
     }
 
     // Create Course
@@ -64,7 +63,7 @@ public class CourseController {
     }
 
     // Search Course
-    @PostMapping("getCourseByName")
+    @PostMapping("/getCourseByName")
     public String SearchCourseByName(@RequestParam("searchNameCourse") String namecourse, Model model,
             HttpSession httpSession) throws Exception {
         ArrayList<Course> courseList = courseRepo.Viewallcourse();
@@ -74,8 +73,8 @@ public class CourseController {
                 findCourse.add(course);
             }
         }
-        model.addAttribute("CourseList", findCourse);
-        return "/Course/CourseMain";
+        model.addAttribute("AllCourses", findCourse);
+        return "Course/CourseMain";
     }
 
     //  Update Course

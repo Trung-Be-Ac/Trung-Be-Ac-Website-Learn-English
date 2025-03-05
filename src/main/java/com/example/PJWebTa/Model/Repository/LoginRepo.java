@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import org.springframework.stereotype.Repository;
 
 import com.example.PJWebTa.Model.Entity.User;
+
 @Repository
 public class LoginRepo {
         // Check Login User
@@ -36,6 +37,7 @@ public class LoginRepo {
                         String userPicture = rs.getString("user_picture");
                         User user = new User(userID, userName, userEmail, userLevel, userDateJoined, userRole, userType,
                                         userPicture, usernameA, passwordA);
+                        allUsers.add(user);
                         con.close();
                         rs.close();
                         ps.close();
@@ -47,7 +49,7 @@ public class LoginRepo {
         }
 
         // UPDATE PASSWORD
-        public static void UpdatePassword(int userID,String passwordA)
+        public static void UpdatePassword(int userID, String passwordA)
                         throws ClassNotFoundException, SQLException {
                 Class.forName(BaseConnection.nameClass);
                 Connection con = DriverManager.getConnection(BaseConnection.url, BaseConnection.username,

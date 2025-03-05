@@ -63,7 +63,7 @@ public class LoginSignupController {
         if (passWord.equals(cPassword)) {
             User user = new User(name, email, role, userName, passWord);
             userRepo.addUsers(user);
-            return ("redirect:/Index");
+            return ("redirect:/");
         } else {
             return "User/Signup";
         }
