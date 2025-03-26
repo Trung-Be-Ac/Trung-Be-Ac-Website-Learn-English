@@ -41,15 +41,13 @@ public class LessonController {
 
     // Create Lesson
     @GetMapping("/CreateLesson")
-    public String pageCreateLesson(@RequestParam("courseID") int courseID, Model model) throws Exception {
-        Course course = courseRepo.getCoursebyID(courseID);
-        model.addAttribute("Course", course);
+    public String pageCreateLesson() throws Exception {
         return "Lesson/CreateLesson";
     }
 
     @PostMapping("/createLesson")
-    public String createLesson(@RequestParam("courseID") int courseID,
-            @RequestParam("lessonDescription") String lessonDescription, @RequestParam("lessonName") String lessonName,
+        public String createLesson(@RequestParam("courseID") int courseID,
+                @RequestParam("lessonDescription") String lessonDescription, @RequestParam("lessonName") String lessonName,
             Model model,
             HttpSession session) throws Exception {
         User user = (User) session.getAttribute("LoginSuccess");

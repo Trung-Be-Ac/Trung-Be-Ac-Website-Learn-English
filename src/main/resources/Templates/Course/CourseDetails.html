@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <h1>Course Details</h1>
     <table border="2">
@@ -31,25 +33,26 @@
         <a th:href="@{/CreateLesson}"> Create Lesson </a>
     </div>
 
-    <table border="1">  
-            <tr>
-                <th>Lesson ID</th>
-                <th>Lesson Name</th>
-                <th>Description</th>    
-                <th>Created By</th>
-                <th>View</th>
-                <th>Edit</th>
-            </tr>
-            <tr th:each="Lesson : ${AllLessons}" th:if="${Lesson.course.courseID == CourseDetails.courseID}">
-                <td th:text="${Lesson.lessonID}"></td>
-                <td th:text="${Lesson.lessonName}"></td>
-                <td th:text="${Lesson.lessonDescription}"></td>
-                <td th:text="${Lesson.user.userName}"></td>
-                <td><a th:href="@{/LessonDetail/{lessonID}(lessonID=${Lesson.lessonID})}">View</a></td>
-                <td><a th:href="@{/EditLesson/{lessonID}(lessonID=${Lesson.lessonID})/}">Edit</a></td>
-            </tr>
+    <table border="1">
+        <tr>
+            <th>Lesson ID</th>
+            <th>Lesson Name</th>
+            <th>Description</th>
+            <th>Created By</th>
+            <th>View</th>
+            <th>Edit</th>
+        </tr>
+        <tr th:each="Lesson : ${AllLessons}" th:if="${Lesson.course.courseID == CourseDetails.courseID}">
+            <td th:text="${Lesson.lessonID}"></td>
+            <td th:text="${Lesson.lessonName}"></td>
+            <td th:text="${Lesson.lessonDescription}"></td>
+            <td th:text="${Lesson.user.userName}"></td>
+            <td><a th:href="@{/LessonDetail/{lessonID}(lessonID=${Lesson.lessonID})}">View</a></td>
+            <td><a th:href="@{/EditLesson/{lessonID}(lessonID=${Lesson.lessonID})/}">Edit</a></td>
+        </tr>
     </table>
     <a th:href="@{/CourseMain}">Back To All Course</a>
 
 </body>
-</html> 
+
+</html>

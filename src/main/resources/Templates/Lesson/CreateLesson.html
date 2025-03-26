@@ -10,10 +10,10 @@
 <body>
 
     <form th:action="@{/createLesson}" method="post">
-        <input type="number" name="courseID" th:value="${Course.courseID}">
-        <input type="number" name="userID" th:value="$session.LoginSuccess.userID">
-        <input type="text" name="lessonDescription" placeholder="Lesson Description">
+        <input type="hidden" name="courseID" th:each="Course : ${AllCourses}" th:value="${Course.courseID}" th:number="${Course.courseID}">
+        <input type="hidden" name="userID" th:value="${session.LoginSuccess.userID}">
         <input type="text" name="lessonName" placeholder="Lesson Name">
+        <input type="text" name="lessonDescription" placeholder="Lesson Description">
         <button type="submit">Create Lesson</button>
     </form>
 
