@@ -1,11 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-    dâdwdwad
+    <h1>Lesson Deatail</h1>
+    <table border="1">
+        <tr>
+            <td>Lesson Name</td>
+            <td>Lesson Description</td>
+        </tr>
+        <td th:text="${LessonDetail.lessonName}"></td>
+        <td th:text="${LessonDetail.lessonDescription}"></td>
+    </table>
+    <!-- ============================ -->
+    <!-- th:if="${session.LoginSuccess !=null and session.LoginSuccess.userRole == 'Teacher'}" -->
+    <h2>Lesson Topic</h2>
+    <table border="2">
+        <tr>
+            <td>Lesson Topic</td>
+            <td>Edit Lesson</td>
+        </tr>
+        <tr>
+            <td><a th:href="${LessonDetail.lessonTopic}" th:text="${LessonDetail.lessonTopic}"></a></td>
+            <td><a th:href="@{/EditLessonTopic/{lessonID}(lessonID = ${LessonDetail.lessonID})}">Edit Topic</a></td>
+        </tr>
+        <div th:if="${session.LoginSuccess != null and session.LoginSuccess.userRole == 'Teacher'}">
+            <a th:href="@{/AddLessonTopic/{lessonID}(lessonID = ${LessonDetail.lessonID})}">
+                <button>Add Lesson Topic</button>
+            </a>
+        </div>
+    </table>
+
 </body>
+
 </html>

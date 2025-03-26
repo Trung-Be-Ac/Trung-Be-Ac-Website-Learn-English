@@ -35,7 +35,7 @@
                         <a class="nav-link" th:href="@{/Course}">Explore</a>
                     </li>
                 </ul>
-                <div th:if = "${session.LoginSuccess != null}">
+                <div th:if="${session.LoginSuccess != null}">
                     Wellcome Back <span th:test="${session.LoginSuccess.userName}"></span>
                 </div>
 
@@ -65,8 +65,10 @@
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <div class="position-relative">
-                    <img src="https://img-c.udemycdn.com/notices/web_carousel_slide/image/e6cc1a30-2dec-4dc5-b0f2-c5b656909d5b.jpg" class="img-fluid w-100" alt="...">
-                    <div class="carousel-text position-absolute top-50 start-0 translate-middle-y ms-5 p-4 bg-white shadow rounded">
+                    <img src="https://img-c.udemycdn.com/notices/web_carousel_slide/image/e6cc1a30-2dec-4dc5-b0f2-c5b656909d5b.jpg"
+                        class="img-fluid w-100" alt="...">
+                    <div
+                        class="carousel-text position-absolute top-50 start-0 translate-middle-y ms-5 p-4 bg-white shadow rounded">
                         <h1 class="fw-bold">Học tập giúp bạn</h1>
                         <p class="mb-0">Kỹ năng cho hiện tại (và tương lai) của bạn. Hãy bắt đầu cùng chúng tôi.</p>
                     </div>
@@ -74,8 +76,10 @@
             </div>
             <div class="carousel-item">
                 <div class="position-relative">
-                    <img src="https://img-c.udemycdn.com/notices/web_carousel_slide/image/10ca89f6-811b-400e-983b-32c5cd76725a.jpg" class="img-fluid w-100" alt="...">
-                    <div class="carousel-text position-absolute top-50 start-0 translate-middle-y ms-5 p-4 bg-white shadow rounded">
+                    <img src="https://img-c.udemycdn.com/notices/web_carousel_slide/image/10ca89f6-811b-400e-983b-32c5cd76725a.jpg"
+                        class="img-fluid w-100" alt="...">
+                    <div
+                        class="carousel-text position-absolute top-50 start-0 translate-middle-y ms-5 p-4 bg-white shadow rounded">
                         <h1 class="fw-bold">Khám phá cơ hội</h1>
                         <p class="mb-0">Tìm kiếm các khóa học phù hợp với nhu cầu của bạn</p>
                         <p>để đạt được mục tiêu và duy trì khả năng cạnh tranh.</p>
@@ -92,7 +96,122 @@
             <span class="visually-hidden">Next</span>
         </button>
     </div>
+    <!-- Under carousel -->
+    <div class="container mt-5">
+        <h2 class="fw-bold text-center">All the English skills you need in one place</h2>
+        <p class="text-center">From grammar to pronunciation, our courses help you master English effectively.</p>
     
+        <div class="d-flex justify-content-center flex-wrap gap-2">
+            <span class="category">Grammar</span>
+            <span class="category">Vocabulary</span>
+            <span class="category">Pronunciation</span>
+            <span class="category">Listening</span>
+            <span class="category">Speaking</span>
+            <span class="category">Writing</span>
+            <span class="category">Business English</span>
+        </div>
+    </div>
+    
+    <!-- Course List -->
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="course-card">
+                    <img src="https://cdn.pixabay.com/photo/2020/09/18/21/12/person-5582976_1280.jpg" class="course-img" alt="Course 1">
+                    <h5 class="course-title">English for Beginners: Master Basic Grammar & Vocabulary</h5>
+                    <p class="course-author">John Smith</p>
+                    <p class="course-rating">⭐ 4.8 (10,583)</p>
+                    <p class="course-price">₫299,000 <del>₫1,699,000</del></p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="course-card">
+                    <img src="https://cdn.pixabay.com/photo/2016/11/23/17/18/bed-1853907_1280.jpg" class="course-img" alt="Course 2">
+                    <h5 class="course-title">Perfect Your English Pronunciation & Accent</h5>
+                    <p class="course-author">Emma Brown</p>
+                    <p class="course-rating">⭐ 4.6 (5,206)</p>
+                    <p class="course-price">₫399,000 <del>₫1,999,000</del></p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="course-card">
+                    <img src="https://cdn.pixabay.com/photo/2017/08/01/00/38/man-2562325_1280.jpg" class="course-img" alt="Course 3">
+                    <h5 class="course-title">Improve Your English Speaking & Conversation Skills</h5>
+                    <p class="course-author">James Lee</p>
+                    <p class="course-rating">⭐ 4.7 (2,341)</p>
+                    <p class="course-price">₫299,000 <del>₫449,000</del></p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="course-card">
+                    <img src="https://cdn.pixabay.com/photo/2015/07/17/22/43/student-849825_1280.jpg" class="course-img" alt="Course 4">
+                    <h5 class="course-title">Business English: Communicate Professionally in English</h5>
+                    <p class="course-author">Sarah Johnson</p>
+                    <p class="course-rating">⭐ 4.9 (3,278)</p>
+                    <p class="course-price">₫299,000 <del>₫449,000</del></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Rating  -->
+    <section class="testimonials container mt-5">
+        <h2 class="fw-bold text-center">See how others are mastering English</h2>
+        <div class="row mt-4">
+            <div class="col-md-3">
+                <div class="testimonial-card">
+                    <p>"This platform transformed my English! The interactive lessons and real-life conversations made learning so much easier."</p>
+                    <div class="testimonial-info">
+                        <img src="https://via.placeholder.com/50" alt="User 1">
+                        <div>
+                            <strong>Hoang Trung</strong>
+                            <span>University Student</span>
+                        </div>
+                    </div>
+                    <a href="#">Explore English Courses</a>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="testimonial-card">
+                    <p>"The pronunciation exercises are fantastic! I feel much more confident speaking English now. Thank You AceYourEnglish !"</p>
+                    <div class="testimonial-info">
+                        <img src="https://via.placeholder.com/50" alt="User 2">
+                        <div>
+                            <strong>Minh Thien</strong>
+                            <span>University Student</span>
+                        </div>
+                    </div>
+                    <a href="#">Practice Pronunciation</a>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="testimonial-card">
+                    <p>"Thanks to this site, I passed my English proficiency test with flying colors! The structured lessons were a huge help."</p>
+                    <div class="testimonial-info">
+                        <img src="https://via.placeholder.com/50" alt="User 3">
+                        <div>
+                            <strong>Thanh Vinh</strong>
+                            <span>Software Developer</span>
+                        </div>
+                    </div>
+                    <a href="#">Prepare for Exams</a>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="testimonial-card">
+                    <p>"I love the writing workshops! My grammar and writing skills have improved so much since I started learning here."</p>
+                    <div class="testimonial-info">
+                        <img src="https://via.placeholder.com/50" alt="User 4">
+                        <div>
+                            <strong>An Nguyen</strong>
+                            <span>Business Consultant</span>
+                        </div>
+                    </div>
+                    <a href="#">Improve Writing Skills</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

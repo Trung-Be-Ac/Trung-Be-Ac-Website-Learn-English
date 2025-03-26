@@ -35,14 +35,28 @@ public class LessonRepo {
         Connection con = DriverManager.getConnection(BaseConnection.url, BaseConnection.username,
                 BaseConnection.password);
         PreparedStatement ps = con.prepareStatement(
-                "insert into lesson (course_id, user_id, lesson_description, lesson_name) values = (?,?,?,?)");
+                "insert into lesson (course_id, user_id, lesson_description, lesson_name,lesson_topic) values = (?,?,?,?,?)");
         ps.setInt(1, lesson.getCourse().getCourseID());
         ps.setInt(2, lesson.getUser().getUserID());
         ps.setString(3, lesson.getLessonDescription());
         ps.setString(4, lesson.getLessonName());
+        ps.setString(5, lesson.getLessonTopic());
         ps.executeUpdate();
         con.close();
         ps.close();
+    }
+
+    // ADD TOPIC
+    public void addLessonTopic(Lesson lesson) throws Exception {
+        Class.forName(BaseConnection.nameClass);
+        Connection con = DriverManager.getConnection(BaseConnection.url, BaseConnection.username,
+                BaseConnection.password);
+        PreparedStatement ps = con.prepareStatement("UPDATE lesson SET lesson_topic = ? WHERE lesson_id = ?");
+        {
+            ps.setString(1, lesson.getLessonTopic());
+            ps.setInt(2, lesson.getLessonID());
+            ps.executeUpdate();
+        }
     }
 
     // DELETE LESSON BY ID
@@ -58,16 +72,32 @@ public class LessonRepo {
     }
 
     // UPDATE LESSON
-    public void updateLesson(int lessonID, Course course, String lessonDescription, String lessonName)
+    public void updateLesson(int lessonID, Course course, String lessonDescription, String lessonName,
+            String lessonTopic)
             throws Exception {
         Class.forName(BaseConnection.nameClass);
         Connection con = DriverManager.getConnection(BaseConnection.url, BaseConnection.username,
                 BaseConnection.password);
-        PreparedStatement ps = con.prepareStatement("delete from lesson where lesson_id = ?;");
+        PreparedStatement ps = con.prepareStatement(
+                "update lesson set lesson_description = ?, lesson_name=?, lesson_topic = ? where lesson_id = ?;");
+        ps.setString(1, lessonDescription);
+        ps.setString(2, lessonName);
+        ps.setString(3, lessonTopic);
+        ps.setInt(4, course.getCourseID());
+        ps.setInt(5, lessonID);
+        ps.executeUpdate();
+        con.close();
+        ps.close();
+    }
+
+    // UPDATE TOPIC
+    public void updateLessonTopic(int lessonID, String lessontopic) throws Exception {
+        Class.forName(BaseConnection.nameClass);
+        Connection con = DriverManager.getConnection(BaseConnection.url, BaseConnection.username,
+                BaseConnection.password);
+        PreparedStatement ps = con.prepareStatement("update lesson set lesson_topic = ? where lesson_id = ? ");
         ps.setInt(1, lessonID);
-        ps.setInt(2, course.getCourseID());
-        ps.setString(3, lessonDescription);
-        ps.setString(4, lessonName);
+        ps.setString(2, lessontopic);
         ps.executeUpdate();
         con.close();
         ps.close();
@@ -87,7 +117,8 @@ public class LessonRepo {
             Course courseID = courseRepo.getCoursebyID(rs.getInt("course_id"));
             String lessonDescription = rs.getString("lesson_description");
             String lessonName = rs.getString("lesson_name");
-            Lesson lesson = new Lesson(lessonId, courseID, userID, lessonDescription, lessonName);
+            String lessonTopic = rs.getString("lesson_topic");
+            Lesson lesson = new Lesson(lessonId, courseID, userID, lessonDescription, lessonName, lessonTopic);
             allLessons.add(lesson);
         }
         con.close();
@@ -111,7 +142,8 @@ public class LessonRepo {
         String lessonName = rs.getString("lesson_name");
         String lessonDescription = rs.getString("lesson_description");
         Boolean lessonStatus = rs.getBoolean("lesson_status");
-        Lesson lesson = new Lesson(lessonID, course, user, lessonDescription, lessonName, lessonStatus);
+        String lessonTopic = rs.getString("lesson_topic");
+        Lesson lesson = new Lesson(lessonID, course, user, lessonDescription, lessonName, lessonStatus, lessonTopic);
         con.close();
         ps.close();
         rs.close();
@@ -133,7 +165,8 @@ public class LessonRepo {
         String lessonName = rs.getString("lesson_name");
         String lessonDescription = rs.getString("lesson_description");
         Boolean lessonStatus = rs.getBoolean("lesson_status");
-        Lesson lesson = new Lesson(lessonID, course, user, lessonDescription, lessonName, lessonStatus);
+        String lessonTopic = rs.getString("lesson_topic");
+        Lesson lesson = new Lesson(lessonID, course, user, lessonDescription, lessonName, lessonStatus, lessonTopic);
         con.close();
         con.close();
         ps.close();
@@ -141,15 +174,15 @@ public class LessonRepo {
         return lesson;
     }
 
-     // Cập nhật trạng thái của bài học thành hoàn thành
-     public void updateLessonAsCompleted(int lessonId) throws Exception {
+    // Cập nhật trạng thái của bài học thành hoàn thành
+    public void updateLessonAsCompleted(int lessonId) throws Exception {
         Class.forName(BaseConnection.nameClass);
         try (Connection con = DriverManager.getConnection(BaseConnection.url, BaseConnection.username,
-                        BaseConnection.password);
-                        PreparedStatement ps = con.prepareStatement(
-                                        "UPDATE lesson SET lesson_status = 1 WHERE lesson_id = ?;")) {
-                ps.setInt(1, lessonId);
-                ps.executeUpdate();
+                BaseConnection.password);
+                PreparedStatement ps = con.prepareStatement(
+                        "UPDATE lesson SET lesson_status = 1 WHERE lesson_id = ?;")) {
+            ps.setInt(1, lessonId);
+            ps.executeUpdate();
         }
-}
+    }
 }

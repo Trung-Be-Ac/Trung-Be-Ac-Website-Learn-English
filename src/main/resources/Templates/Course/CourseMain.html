@@ -8,6 +8,112 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
 </head>
+<style>
+    body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fa;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+input[type="text"] {
+    width: 300px;
+    padding: 8px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+}
+
+button {
+    padding: 8px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+a {
+    text-decoration: none;
+    color: #007bff;
+    transition: 0.3s;
+}
+
+a:hover {
+    color: #0056b3;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+}
+
+th {
+    background-color: #007bff;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #e9ecef;
+}
+
+.create-course {
+    display: inline-block;
+    padding: 10px 15px;
+    background: #28a745;
+    color: white;
+    border: 2px solid #218838;
+    border-radius: 5px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.create-course:hover {
+    background: #218838;
+    border-color: #1e7e34;
+}
+
+
+</style>
 
 <body>
 
@@ -18,7 +124,8 @@
         </form>
         <div>
 
-            <a th:href="@{/CreateCourse}">Create Course</a>
+            <a th:if="${session.LoginSuccess !=null and session.LoginSuccess.userRole == 'Teacher'}"
+                th:href="@{/CreateCourse}">Create Course</a>
         </div>
         <table border="2px">
             <tr>

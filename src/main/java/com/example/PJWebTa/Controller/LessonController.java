@@ -40,25 +40,23 @@ public class LessonController {
 
     // Create Lesson
     @GetMapping("/CreateLesson")
-    public String pageCreateLesson() throws Exception {
-        return "Lesson/CreateLesson.html";
+    public String pageCreateLesson(@RequestParam("courseID") int courseID, Model model) throws Exception {
+        Course course = courseRepo.getCoursebyID(courseID);
+        model.addAttribute("Course", course);
+        return "Lesson/CreateLesson";
     }
 
     @PostMapping("/createLesson")
     public String createLesson(@RequestParam("courseID") int courseID,
             @RequestParam("lessonDescription") String lessonDescription, @RequestParam("lessonName") String lessonName,
+            Model model,
             HttpSession session) throws Exception {
         User user = (User) session.getAttribute("LoginSuccess");
         Course course = courseRepo.getCoursebyID(courseID);
         Lesson lesson = new Lesson(0, course, user, lessonDescription, lessonName);
+        model.addAttribute("Course", course);
         lessonRepo.addLesson(lesson);
         return "redirect:/CourseDetail/{courseID}";
-    }
-
-    // View Detail
-    @GetMapping("/LessonDetail/{lessonID}")
-    public String lessonDeatil() {
-        return "Lesson/LessonDetails";
     }
 
     // Edit Lesson
@@ -66,6 +64,8 @@ public class LessonController {
     public String editLessonPage(@PathVariable("lessonID") int lessonID, Model model) throws Exception {
         Lesson lesson = lessonRepo.getLessonbyID(lessonID);
         ArrayList<Course> allCourses = courseRepo.Viewallcourse();
+        ArrayList<Lesson> allLessons = lessonRepo.viewAllLessons();
+        model.addAttribute("AllLessons", allLessons);
         model.addAttribute("Lesson", lesson);
         model.addAttribute("AllCourses", allCourses);
         return "Lesson/LessonEdit";
@@ -77,7 +77,39 @@ public class LessonController {
             @RequestParam("lessonName") String lessonName,
             @RequestParam("lessonDescription") String lessonDescription) throws Exception {
         Course course = courseRepo.getCoursebyID(courseID);
-        lessonRepo.updateLesson(lessonID, course, lessonDescription, lessonName);
+        lessonRepo.updateLesson(lessonID, course, lessonDescription, lessonName, lessonName);
         return "redirect:/LessonDetail/{lessonID}";
     }
+
+    // Edit Lesson Topic
+    @GetMapping("/EditLessonTopic/{lessonID}")
+    public String editLessonTopic(@PathVariable("lessonID") int lessonID, Model model) throws Exception {
+        Lesson lessonIdTopic = lessonRepo.getLessonbyID(lessonID);
+        model.addAttribute("LessonTopic", lessonIdTopic);
+        return "Lesson/LessonTopicEdit";
+    }
+
+    @PostMapping("/editLessonTopic")
+    public String editLesson(@RequestParam("lessonID") int lessonID, @RequestParam("lessonTopic") String lessonTopic)
+            throws Exception {
+        lessonRepo.updateLessonTopic(lessonID, lessonTopic);
+        return "redirect:/LessonDetail/{lessonID}";
+    }
+
+    // Add Lesson Topic
+    @GetMapping("/AddLessonTopic/{lessonID}")
+    public String addLessonTopic(@PathVariable("lessonID") int lessonID, Model model) throws Exception {
+        Lesson lessonIdTopic = lessonRepo.getLessonbyID(lessonID);
+        model.addAttribute("LessonTopic", lessonIdTopic);
+        return "Lesson/AddLessonTopic";
+    }
+
+    @PostMapping("/addLessonTopic")
+    public String addTopic(@RequestParam int lessonID, @RequestParam String lessonTopic, Model model) throws Exception {
+        Lesson lessonbyID = lessonRepo.getLessonbyID(lessonID);
+        Lesson lesson = new Lesson(lessonID, lessonTopic);
+        lessonRepo.addLessonTopic(lesson);
+        return "redirect:/LessonDetail/{lessonID}";
+    }
+
 }
