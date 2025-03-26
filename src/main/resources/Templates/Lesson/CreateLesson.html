@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-    
+
     <form th:action="@{/createLesson}" method="post">
-        <input type="number" name="courseID"  th:value="${Course.courseID}">
+        <input type="number" name="courseID" th:value="${Course.courseID}">
         <input type="number" name="userID" th:value="$session.LoginSuccess.userID">
         <input type="text" name="lessonDescription" placeholder="Lesson Description">
         <input type="text" name="lessonName" placeholder="Lesson Name">
         <button type="submit">Create Lesson</button>
     </form>
-   
+
 </body>
+
 </html>
