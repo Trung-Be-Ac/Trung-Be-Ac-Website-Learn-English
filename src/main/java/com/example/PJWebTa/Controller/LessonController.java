@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.PJWebTa.Model.Entity.Course;
 import com.example.PJWebTa.Model.Entity.Lesson;
@@ -105,11 +106,12 @@ public class LessonController {
     }
 
     @PostMapping("/addLessonTopic")
-    public String addTopic(@RequestParam int lessonID, @RequestParam String lessonTopic, Model model) throws Exception {
+    public String addTopic(@RequestParam int lessonID, @RequestParam String lessonTopic, Model model,RedirectAttributes redirectAttributes) throws Exception {
         Lesson lessonbyID = lessonRepo.getLessonbyID(lessonID);
         Lesson lesson = new Lesson(lessonID, lessonTopic);
         lessonRepo.addLessonTopic(lesson);
+        redirectAttributes.addAttribute("lessonID", lessonID);
         return "redirect:/LessonDetail/{lessonID}";
-    }
+        }
 
 }
