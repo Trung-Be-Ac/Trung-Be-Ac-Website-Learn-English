@@ -55,7 +55,7 @@ public class LessonController {
         Lesson lesson = new Lesson(0, course, user, lessonDescription, lessonName);
         model.addAttribute("Course", course);
         lessonRepo.addLesson(lesson);
-        return "redirect:/CourseDetail/{courseID}";
+        return "redirect:/CourseDetail/" + courseID;
     }
 
     // Edit Lesson
