@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Upload và Hiển thị File PDF</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+      }
+      #toolbar {
+        margin: 10px;
+      }
+      button {
+        margin: 5px;
+        padding: 5px 10px;
+      }
+      #pdfContainer {
+        width: 100vw;
+        height: 80vh;
+        overflow: auto;
+        border: 1px solid #ddd;
+      }
+      canvas {
+        display: block;
+        margin: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Upload và Hiển thị File PDF</h2>
+    <input type="file" id="fileInput" accept="application/pdf" />
+    <div id="toolbar">
+      <button id="prevPage">&#9665; Trang Trước</button>
+      <span id="pageNum">1</span> / <span id="pageCount">1</span>
+      <button id="nextPage">Trang Sau &#9655;</button>
+      <button id="zoomIn">+</button>
+      <button id="zoomOut">-</button>
+      <button id="download">&#x2B07; Tải Xuống</button>
+    </div>
+    <div id="pdfContainer">
+      <canvas id="pdfCanvas"></canvas>
+    </div>
+
+    <script>
+      let pdfDoc = null,
+        pageNum = 1,
+        scale = 1.5;
+      const canvas = document.getElementById("pdfCanvas");
+      const ctx = canvas.getContext("2d");
+
+      function renderPage(num) {
+        pdfDoc.getPage(num).then((page) => {
+          const viewport = page.getViewport({ scale });
+          canvas.width = viewport.width;
+          canvas.height = viewport.height;
+          page.render({ canvasContext: ctx, viewport });
+          document.getElementById("pageNum").textContent = num;
+        });
+      }
+
+      document
+        .getElementById("fileInput")
+        .addEventListener("change", function (event) {
+          const file = event.target.files[0];
+          if (file && file.type === "application/pdf") {
+            const fileReader = new FileReader();
+            fileReader.onload = function () {
+              pdfjsLib
+                .getDocument(new Uint8Array(this.result))
+                .promise.then((pdf) => {
+                  pdfDoc = pdf;
+                  document.getElementById("pageCount").textContent =
+                    pdf.numPages;
+                  pageNum = 1;
+                  renderPage(pageNum);
+                });
+            };
+            fileReader.readAsArrayBuffer(file);
+          } else {
+            alert("Vui lòng chọn một file PDF!");
+          }
+        });
+
+      document.getElementById("prevPage").addEventListener("click", () => {
+        if (pageNum > 1) renderPage(--pageNum);
+      });
+
+      document.getElementById("nextPage").addEventListener("click", () => {
+        if (pageNum < pdfDoc.numPages) renderPage(++pageNum);
+      });
+
+      document.getElementById("zoomIn").addEventListener("click", () => {
+        scale += 0.2;
+        renderPage(pageNum);
+      });
+
+      document.getElementById("zoomOut").addEventListener("click", () => {
+        if (scale > 0.5) {
+          scale -= 0.2;
+          renderPage(pageNum);
+        }
+      });
+
+      document.getElementById("download").addEventListener("click", () => {
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(
+          document.getElementById("fileInput").files[0]
+        );
+        link.download = "downloaded.pdf";
+        link.click();
+      });
+    </script>
+  </body>
+</html>

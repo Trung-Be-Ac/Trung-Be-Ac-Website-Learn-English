@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>PDF Viewer</title>
+</head>
+<body>
+<h1>Upload PDF</h1>
+<form method="post" enctype="multipart/form-data" action="/upload">
+    <input type="file" name="file" accept="application/pdf"/>
+    <button type="submit">Upload</button>
+</form>
+
+<h2>File Uploaded PDFs</h2>
+<ul>
+    <li th:each="file : ${files}">
+        <a th:href="@{'/pdf-viewer?file=' + ${file}}" th:text="${file}"></a>
+    </li>
+</ul>
+</body>
+</html>
