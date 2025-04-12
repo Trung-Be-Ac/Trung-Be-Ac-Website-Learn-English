@@ -35,29 +35,16 @@ public class LessonRepo {
         Connection con = DriverManager.getConnection(BaseConnection.url, BaseConnection.username,
                 BaseConnection.password);
         PreparedStatement ps = con.prepareStatement(
-                "insert into lesson (course_id, user_id, lesson_description, lesson_name,lesson_topic) values = (?,?,?,?,?)");
+                "insert into lesson (course_id, user_id, lesson_description, lesson_name) values = (?,?,?,?)");
         ps.setInt(1, lesson.getCourse().getCourseID());
         ps.setInt(2, lesson.getUser().getUserID());
         ps.setString(3, lesson.getLessonDescription());
         ps.setString(4, lesson.getLessonName());
-        ps.setString(5, lesson.getLessonTopic());
         ps.executeUpdate();
         con.close();
         ps.close();
     }
 
-    // ADD TOPIC
-    public void addLessonTopic(Lesson lesson) throws Exception {
-        Class.forName(BaseConnection.nameClass);
-        Connection con = DriverManager.getConnection(BaseConnection.url, BaseConnection.username,
-                BaseConnection.password);
-        PreparedStatement ps = con.prepareStatement("UPDATE lesson SET lesson_topic = ? WHERE lesson_id = ?");
-        {
-            ps.setString(1, lesson.getLessonTopic());
-            ps.setInt(2, lesson.getLessonID());
-            ps.executeUpdate();
-        }
-    }
 
     // DELETE LESSON BY ID
     public static void deleteLessonByID(int id) throws Exception {
@@ -113,12 +100,11 @@ public class LessonRepo {
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
             int lessonId = rs.getInt("lesson_id");
-            User userID = userRepo.getUserbyID(rs.getInt("user_id"));
             Course courseID = courseRepo.getCoursebyID(rs.getInt("course_id"));
+            User userID = userRepo.getUserbyID(rs.getInt("user_id"));
             String lessonDescription = rs.getString("lesson_description");
             String lessonName = rs.getString("lesson_name");
-            String lessonTopic = rs.getString("lesson_topic");
-            Lesson lesson = new Lesson(lessonId, courseID, userID, lessonDescription, lessonName, lessonTopic);
+            Lesson lesson = new Lesson(lessonId, courseID, userID, lessonDescription, lessonName);
             allLessons.add(lesson);
         }
         con.close();
@@ -142,8 +128,7 @@ public class LessonRepo {
         String lessonName = rs.getString("lesson_name");
         String lessonDescription = rs.getString("lesson_description");
         Boolean lessonStatus = rs.getBoolean("lesson_status");
-        String lessonTopic = rs.getString("lesson_topic");
-        Lesson lesson = new Lesson(lessonID, course, user, lessonDescription, lessonName, lessonStatus, lessonTopic);
+        Lesson lesson = new Lesson(lessonID, course, user, lessonDescription, lessonName, lessonStatus);
         con.close();
         ps.close();
         rs.close();
@@ -166,7 +151,7 @@ public class LessonRepo {
         String lessonDescription = rs.getString("lesson_description");
         Boolean lessonStatus = rs.getBoolean("lesson_status");
         String lessonTopic = rs.getString("lesson_topic");
-        Lesson lesson = new Lesson(lessonID, course, user, lessonDescription, lessonName, lessonStatus, lessonTopic);
+        Lesson lesson = new Lesson(lessonID, course, user, lessonDescription, lessonName);
         con.close();
         con.close();
         ps.close();

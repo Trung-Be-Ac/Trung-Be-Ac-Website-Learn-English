@@ -76,7 +76,6 @@ public class FilePDFController {
 
     @GetMapping("/UploadAndView")
     public String viewPdf(Model model) {
-
         return "UploadAndView";
 
     }

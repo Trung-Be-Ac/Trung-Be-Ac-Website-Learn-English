@@ -1,7 +1,7 @@
 package com.example.PJWebTa.Model.Entity;
+
 import lombok.*;
 
-@AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
@@ -14,26 +14,6 @@ public class Lesson {
     private String lessonDescription;
     private String lessonName;
     private Boolean lessonStatus;
-    private String lessonTopic;
-    
-    public Lesson(int lessonID, String lessonTopic) {
-        this.lessonID = lessonID;
-        this.lessonTopic = lessonTopic;
-    }
-
-
-
-    public Lesson(int lessonID, Course course, User user, String lessonDescription, String lessonName,
-            String lessonTopic) {
-        this.lessonID = lessonID;
-        this.course = course;
-        this.user = user;
-        this.lessonDescription = lessonDescription;
-        this.lessonName = lessonName;
-        this.lessonTopic = lessonTopic;
-    }
-
-
 
     public Lesson(int lessonID, Course course, User user, String lessonDescription, String lessonName) {
         this.lessonID = lessonID;
@@ -42,4 +22,15 @@ public class Lesson {
         this.lessonDescription = lessonDescription;
         this.lessonName = lessonName;
     }
+
+    public Lesson(int lessonID, Course course, User user, String lessonDescription, String lessonName,
+            Boolean lessonStatus) {
+        this.lessonID = lessonID;
+        this.course = course;
+        this.user = user;
+        this.lessonDescription = lessonDescription;
+        this.lessonName = lessonName;
+        this.lessonStatus = lessonStatus;
+    }
+
 }

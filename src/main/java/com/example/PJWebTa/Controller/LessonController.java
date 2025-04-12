@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.PJWebTa.Model.Entity.Course;
+import com.example.PJWebTa.Model.Entity.Files;
 import com.example.PJWebTa.Model.Entity.Lesson;
 import com.example.PJWebTa.Model.Entity.User;
 import com.example.PJWebTa.Model.Repository.CourseRepo;
+import com.example.PJWebTa.Model.Repository.FileLessonRepo;
 import com.example.PJWebTa.Model.Repository.LessonRepo;
 import com.example.PJWebTa.Model.Repository.UserRepo;
 
@@ -31,11 +33,16 @@ public class LessonController {
     @Autowired
     UserRepo userRepo = new UserRepo();
 
+    @Autowired
+    FileLessonRepo fileLessonRepo = new FileLessonRepo();
+
     // View Lesson Details
     @GetMapping("/LessonDetail/{lessonID}")
     public String viewLessonDetail(@PathVariable("lessonID") int lessonID, Model model) throws Exception {
         Lesson lesson = lessonRepo.getLessonbyID(lessonID);
         model.addAttribute("LessonDetail", lesson);
+        ArrayList<Files> lessonFiles = fileLessonRepo.getFilesByLessonId(lessonID);
+        model.addAttribute("AllFiles", lessonFiles); 
         return "Lesson/LessonDetail";
     }
 
@@ -79,37 +86,5 @@ public class LessonController {
         lessonRepo.updateLesson(lessonID, course, lessonDescription, lessonName, lessonName);
         return "redirect:/LessonDetail/{lessonID}";
     }
-
-    // Edit Lesson Topic
-    @GetMapping("/EditLessonTopic/{lessonID}")
-    public String editLessonTopic(@PathVariable("lessonID") int lessonID, Model model) throws Exception {
-        Lesson lessonIdTopic = lessonRepo.getLessonbyID(lessonID);
-        model.addAttribute("LessonTopic", lessonIdTopic);
-        return "Lesson/LessonTopicEdit";
-    }
-
-    @PostMapping("/editLessonTopic")
-    public String editLesson(@RequestParam("lessonID") int lessonID, @RequestParam("lessonTopic") String lessonTopic)
-            throws Exception {
-        lessonRepo.updateLessonTopic(lessonID, lessonTopic);
-        return "redirect:/LessonDetail/{lessonID}";
-    }
-
-    // Add Lesson Topic
-    @GetMapping("/AddLessonTopic/{lessonID}")
-    public String addLessonTopic(@PathVariable("lessonID") int lessonID, Model model) throws Exception {
-        Lesson lessonIdTopic = lessonRepo.getLessonbyID(lessonID);
-        model.addAttribute("LessonTopic", lessonIdTopic);
-        return "Lesson/AddLessonTopic";
-    }
-
-    @PostMapping("/addLessonTopic")
-    public String addTopic(@RequestParam int lessonID, @RequestParam String lessonTopic, Model model,RedirectAttributes redirectAttributes) throws Exception {
-        Lesson lessonbyID = lessonRepo.getLessonbyID(lessonID);
-        Lesson lesson = new Lesson(lessonID, lessonTopic);
-        lessonRepo.addLessonTopic(lesson);
-        redirectAttributes.addAttribute("lessonID", lessonID);
-        return "redirect:/LessonDetail/{lessonID}";
-        }
 
 }

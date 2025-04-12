@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add File</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 50px auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form div {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            color: #444;
+        }
+
+        input[type="text"],
+        input[type="file"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #004f99;
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-link a {
+            text-decoration: none;
+            color: #0066cc;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Thêm File Cho Bài Học</h1>
+        <form th:action="@{/addFile}" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="lessonId" th:value="${lessonId}" />
+            
+            <div>
+                <label for="fileName">Tên file:</label>
+                <input type="text" id="fileName" name="fileName" required />
+            </div>
+            
+            <div>
+                <label for="fileData">Chọn file:</label>
+                <input type="file" id="fileData" name="fileData" required />
+            </div>
+            
+            <div>
+                <button type="submit">Thêm File</button>
+            </div>
+        </form>
+
+        <div class="back-link">
+            <a th:href="@{/Course}">← Quay lại khóa học</a>
+        </div>
+    </div>
+</body>
+</html>
