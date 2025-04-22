@@ -1,94 +1,112 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Detail File PDF</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        text-align: center;
-      }
-      #toolbar {
-        margin: 10px;
-      }
-      button {
-        margin: 5px;
-        padding: 5px 10px;
-      }
-      #pdfContainer {
-        width: 100vw;
-        height: 80vh;
-        overflow: auto;
-        border: 1px solid #ddd;
-      }
-      canvas {
-        display: block;
-        margin: auto;
-      }
-    </style>
-  </head>
-  <body>
-    <h2>File PDF Detail</h2>
+<head>
+  <meta charset="UTF-8" />
+  <title>Xem File PDF</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    #toolbar {
+      margin: 10px;
+    }
+    button {
+      margin: 5px;
+      padding: 5px 10px;
+    }
+    #pdfContainer {
+      width: 100vw;
+      height: 80vh;
+      overflow: auto;
+      border: 1px solid #ddd;
+    }
+    canvas {
+      display: block;
+      margin: auto;
+    }
+  </style>
+</head>
+<body>
+  <h2>Xem File PDF</h2>
 
-    <div id="toolbar">
-      <button id="prevPage">&#9665; Trang Trước</button>
-      <span id="pageNum">1</span> / <span id="pageCount">1</span>
-      <button id="nextPage">Trang Sau &#9655;</button>
-      <button id="zoomIn">+</button>
-      <button id="zoomOut">-</button>
-      <a id="download" th:href="@{'/downloadFile/' + ${file.idFile}}">&#x2B07; Tải Xuống</a>
-    </div>
+  <div>
+      <object th:data="${pdfUrl}" type="application/pdf" width="100%" height="500px">
+        Trình duyệt không hỗ trợ hiển thị PDF. 
+      </object>
+    <!-- <object data="/FilesPDF/1745041350766_MultichoicesQuestion.pdf" type="application/pdf" width="100%" height="500px">
+      Trình duyệt không hỗ trợ hiển thị PDF. 
+    </object> -->
+  
+</div>
 
-    <div id="pdfContainer">
-      <canvas id="pdfCanvas"></canvas>
-    </div>
+  <!-- <div id="toolbar">
+    <button id="prevPage">&#9665; Trang Trước</button>
+    <span id="pageNum">1</span> / <span id="pageCount">1</span>
+    <button id="nextPage">Trang Sau &#9655;</button>
+    <button id="zoomIn">+</button>
+    <button id="zoomOut">-</button>
+  </div>
+  <iframe src="/FilesPDF/testUploadfileandView.txt" width="100%" height="600px"></iframe>
+  <div id="pdfContainer">
+    <canvas id="pdfCanvas"></canvas>
+  </div>
 
-    <script>
-      let pdfDoc = null,
-        pageNum = 1,
-        scale = 1.5;
-      const canvas = document.getElementById("pdfCanvas");
-      const ctx = canvas.getContext("2d");
+  <script th:inline="javascript">
+    let pdfDoc = null,
+      pageNum = 1,
+      scale = 1.5;
+    const canvas = document.getElementById("pdfCanvas");
+    const ctx = canvas.getContext("2d");
 
-      const url = /*[[${'/file/pdf/' + file.idFile}]]*/ "";
+    // Đường dẫn đến file PDF (từ thư mục static)
+    const pdfUrl = "/FilesPDF/1745042588488_BaiTapTH.pdf";  // Đảm bảo URL hợp lệ
 
-      pdfjsLib.getDocument(url).promise.then((pdf) => {
-        pdfDoc = pdf;
-        document.getElementById("pageCount").textContent = pdf.numPages;
+    // // Kiểm tra nếu pdfUrl là hợp lệ
+    // if (pdfUrl) {
+    //   pdfjsLib.getDocument(pdfUrl).promise.then((pdf) => {
+    //     pdfDoc = pdf;
+    //     document.getElementById("pageCount").textContent = pdf.numPages;
+    //     pageNum = 1;
+    //     renderPage(pageNum);
+    //   }).catch((error) => {
+    //     console.error("Lỗi khi tải file PDF: ", error);
+    //   });
+    // } else {
+    //   console.error("Không tìm thấy đường dẫn PDF.");
+    // }
+
+    // Hàm hiển thị trang PDF
+    function renderPage(num) {
+      pdfDoc.getPage(num).then((page) => {
+        const viewport = page.getViewport({ scale });
+        canvas.width = viewport.width;
+        canvas.height = viewport.height;
+        page.render({ canvasContext: ctx, viewport });
+        document.getElementById("pageNum").textContent = num;
+      });
+    }
+
+    document.getElementById("prevPage").addEventListener("click", () => {
+      if (pageNum > 1) renderPage(--pageNum);
+    });
+
+    document.getElementById("nextPage").addEventListener("click", () => {
+      if (pageNum < pdfDoc.numPages) renderPage(++pageNum);
+    });
+
+    document.getElementById("zoomIn").addEventListener("click", () => {
+      scale += 0.2;
+      renderPage(pageNum);
+    });
+
+    document.getElementById("zoomOut").addEventListener("click", () => {
+      if (scale > 0.5) {
+        scale -= 0.2;
         renderPage(pageNum);
-      });
-
-      function renderPage(num) {
-        pdfDoc.getPage(num).then((page) => {
-          const viewport = page.getViewport({ scale });
-          canvas.width = viewport.width;
-          canvas.height = viewport.height;
-          page.render({ canvasContext: ctx, viewport });
-          document.getElementById("pageNum").textContent = num;
-        });
       }
-
-      document.getElementById("prevPage").addEventListener("click", () => {
-        if (pageNum > 1) renderPage(--pageNum);
-      });
-
-      document.getElementById("nextPage").addEventListener("click", () => {
-        if (pageNum < pdfDoc.numPages) renderPage(++pageNum);
-      });
-
-      document.getElementById("zoomIn").addEventListener("click", () => {
-        scale += 0.2;
-        renderPage(pageNum);
-      });
-
-      document.getElementById("zoomOut").addEventListener("click", () => {
-        if (scale > 0.5) {
-          scale -= 0.2;
-          renderPage(pageNum);
-        }
-      });
-    </script>
-  </body>
+    });
+  </script> -->
+</body>
 </html>

@@ -11,11 +11,13 @@ public class Files {
     private int idFile;
     private Lesson lesson;
     private String fileName;
-    private byte[] fileData;
+    private String filePath; 
 
-    public Files(Lesson lesson, String fileName, byte[] fileData) {
+    public Files(Lesson lesson, String fileName, String filePath) {
         this.lesson = lesson;
         this.fileName = fileName;
-        this.fileData = fileData;
+        this.filePath = filePath;
+        
     }
+    
 }

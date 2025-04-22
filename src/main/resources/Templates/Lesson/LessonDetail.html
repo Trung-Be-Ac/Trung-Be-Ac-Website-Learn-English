@@ -39,12 +39,11 @@
             <td th:text="${Files.lesson.lessonID}"></td>
             <td th:text="${Files.fileName}"></td>
             <td>
-                <a th:href="@{'/viewFileDetail/' + ${Files.idFile}}">View File Content</a>
+                <a th:href="@{'/viewFileDetail/' + ${Files.idFile}}">View Content</a>
             </td>
 
             <td><a th:href="@{'/downloadFile/' + ${Files.idFile}}">Download</a></td>
             <td th:if="${session.LoginSuccess != null and session.LoginSuccess.userRole == 'Teacher'}">
-                <a th:href="@{/ViewFileLesson}">View</a>
                 <a th:href="@{'/deleteFile'(fileId=${Files.idFile}, lessonId=${LessonDetail.lessonID})}">Delete</a>
             </td>
         </tr>

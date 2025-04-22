@@ -20,10 +20,10 @@ public class FileLessonRepo {
         Connection con = DriverManager.getConnection(BaseConnection.url, BaseConnection.username,
                 BaseConnection.password);
         PreparedStatement ps = con.prepareStatement(
-                "INSERT INTO files (lesson_id, file_name, file_data) VALUES (?, ?, ?)");
+                "INSERT INTO files (lesson_id, file_name, file_path) VALUES (?, ?, ?)");
         ps.setInt(1, file.getLesson().getLessonID());
         ps.setString(2, file.getFileName());
-        ps.setBytes(3, file.getFileData());
+        ps.setString(3, file.getFilePath()); // Lưu đường dẫn
         ps.executeUpdate();
         ps.close();
         con.close();
@@ -54,8 +54,8 @@ public class FileLessonRepo {
             int fileId = rs.getInt("id");
             Lesson lesson = lessonRepo.getLessonbyID(lessonId);
             String fileName = rs.getString("file_name");
-            byte[] fileData = rs.getBytes("file_data");
-            Files file = new Files(fileId, lesson, fileName, fileData);
+            String filePath = rs.getString("file_path");
+            Files file = new Files(fileId, lesson, fileName, filePath);
             fileList.add(file);
         }
         rs.close();
@@ -64,22 +64,21 @@ public class FileLessonRepo {
         return fileList;
     }
 
-    // Get all Lesson
+    // Get all files
     public ArrayList<Files> getAllFiles() throws Exception {
         ArrayList<Files> allFiles = new ArrayList<>();
         Class.forName(BaseConnection.nameClass);
         Connection con = DriverManager.getConnection(BaseConnection.url, BaseConnection.username,
                 BaseConnection.password);
-        PreparedStatement ps = con.prepareStatement(
-                "Select * from files");
+        PreparedStatement ps = con.prepareStatement("SELECT * FROM files");
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
             int filesID = rs.getInt("id");
-            Lesson lessonID = lessonRepo.getLessonbyID(rs.getInt("lesson_id"));
+            Lesson lesson = lessonRepo.getLessonbyID(rs.getInt("lesson_id"));
             String filesName = rs.getString("file_name");
-            byte[] filesData = rs.getBytes("file_data");
-            Files files = new Files(filesID, lessonID, filesName, filesData);
-            allFiles.add(files);
+            String filePath = rs.getString("file_path");
+            Files file = new Files(filesID, lesson, filesName, filePath);
+            allFiles.add(file);
         }
         con.close();
         ps.close();
@@ -92,20 +91,20 @@ public class FileLessonRepo {
         Class.forName(BaseConnection.nameClass);
         Connection con = DriverManager.getConnection(BaseConnection.url, BaseConnection.username,
                 BaseConnection.password);
-        PreparedStatement ps = con.prepareStatement("select * from PRODUCT where IDProduct = ?");
+        PreparedStatement ps = con.prepareStatement("SELECT * FROM files WHERE id = ?");
         ps.setInt(1, ID);
         ResultSet rs = ps.executeQuery();
-        Files files = null;
+        Files file = null;
         if (rs.next()) {
-            int filesID = rs.getInt("id");
-            Lesson lessonID = lessonRepo.getLessonbyID(rs.getInt("lesson_id"));
-            String filesName = rs.getString("file_name");
-            byte[] filesData = rs.getBytes("file_data");
-            files = new Files(filesID, lessonID, filesName, filesData); 
+            int fileId = rs.getInt("id");
+            Lesson lesson = lessonRepo.getLessonbyID(rs.getInt("lesson_id"));
+            String fileName = rs.getString("file_name");
+            String filePath = rs.getString("file_path");
+            file = new Files(fileId, lesson, fileName, filePath);
         }
         con.close();
         ps.close();
         rs.close();
-        return files;
+        return file;
     }
 }
