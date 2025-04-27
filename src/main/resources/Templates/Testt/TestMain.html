@@ -10,14 +10,20 @@
 
     <table>
         <tr>
+            <td>Test ID</td>
             <td>Test Name </td>
-            <td>From Lesson</td>
-            <td></td>
-            <td></td>
+            <td>Lesson ID</td>
+            <td>Question Type</td>
+            <td>Time</td>
         </tr>
         <!-- ====== -->
-        <tr>
-
+        <tr th:each = "Test : ${AllTests}">
+            <td th:text="Test.testID"></td>
+            <td th:text="Test.testName"></td>
+            <td th:text="Test.lesson.lessonID"></td>
+            <td th:text="Test.testQuestionType"></td>
+            <td th:text="Test.testTime"></td>
+            
         </tr>
     </table>
 </body>

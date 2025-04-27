@@ -90,6 +90,6 @@ public class TestController {
     @GetMapping("/DeleteTest/{testID}")
     public String deleteTest(@PathVariable("testID") int testID) throws Exception {
         TestRepo.DeleteTestByID(testID);
-        return "redirect:/AllTest";
+        return "redirect:/AllTests";
     }
 }
