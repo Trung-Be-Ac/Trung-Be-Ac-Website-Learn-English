@@ -1,45 +1,46 @@
 package com.example.PJWebTa.Model.Repository;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Time;
 
 import org.springframework.stereotype.Repository;
 
-import com.example.PJWebTa.Model.Entity.Course;
-import com.example.PJWebTa.Model.Entity.Lesson;
 import com.example.PJWebTa.Model.Entity.QuizTest;
 import com.example.PJWebTa.Model.Entity.Test;
-import com.example.PJWebTa.Model.Entity.User;
 
 @Repository
 public class QuizRepo {
+
+    TestRepo testRepo = new TestRepo();
 
     public QuizTest getQuizByID(int id) throws Exception {
         Class.forName(BaseConnection.nameClass);
         Connection con = DriverManager.getConnection(BaseConnection.url, BaseConnection.username,
                 BaseConnection.password);
-        PreparedStatement ps = con.prepareStatement("select * from quiz where quiz_id = ?;");
+        PreparedStatement ps = con.prepareStatement("SELECT * FROM quiz WHERE quiz_id = ?;");
         ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
-        rs.next();
-        int quizID = rs.getInt("quiz_id");
-        String quizTitle = rs.getString("quiz_title");
-        String quizText = rs.getString("quiz_text");
-        String quizCorrectanswer = rs.getString("quiz_Correctanswer");
-        String quizA = rs.getString("quiz_a");
-        String quizB = rs.getString("quiz_b");
-        String quizC = rs.getString("quiz_c");
-        String quizD = rs.getString("quiz_d");
-        QuizTest quiztTest = new QuizTest(quizID, quizTitle, quizText, quizCorrectanswer, quizA, quizB, quizC, quizD);
+        
+        QuizTest quizTest = null;
+        if (rs.next()) {
+            int quizID = rs.getInt("quiz_id");
+            String quizTitle = rs.getString("quiz_title");
+            String quizText = rs.getString("quiz_text");
+            String quizA = rs.getString("quiz_a");
+            String quizB = rs.getString("quiz_b");
+            String quizC = rs.getString("quiz_c");
+            String quizD = rs.getString("quiz_d");
+            String quizCorrectAnswer = rs.getString("quiz_correctanswer");
+            int testID = rs.getInt("test_id");
+            Test test = testRepo.getTestByID(testID);
+            quizTest = new QuizTest(quizID, quizTitle, quizText, quizA, quizB, quizC, quizD, quizCorrectAnswer, test);
+        }
         con.close();
         ps.close();
         rs.close();
-        return quiztTest;
+        return quizTest;
     }
 
     // Add a new quiz
@@ -48,8 +49,7 @@ public class QuizRepo {
         Connection con = DriverManager.getConnection(BaseConnection.url, BaseConnection.username,
                 BaseConnection.password);
         PreparedStatement ps = con.prepareStatement(
-                "INSERT INTO quiz (quiz_title, quiz_text, quiz_a, quiz_b, quiz_c, quiz_d, quiz_correctanswer, user_id)\n"
-                        +
+                "INSERT INTO quiz (quiz_title, quiz_text, quiz_a, quiz_b, quiz_c, quiz_d, quiz_correctanswer, test_id) " +
                         "VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
         ps.setString(1, quiz.getQuizTitle());
         ps.setString(2, quiz.getQuizText());
@@ -58,7 +58,7 @@ public class QuizRepo {
         ps.setString(5, quiz.getQuizC());
         ps.setString(6, quiz.getQuizD());
         ps.setString(7, quiz.getQuizCorrectanswer());
-        ps.setInt(8, quiz.getQuizID());
+        ps.setInt(8, quiz.getTest().getTestID()); // Lấy test_id từ QuizTest
         ps.executeUpdate();
         con.close();
         ps.close();
@@ -77,47 +77,54 @@ public class QuizRepo {
     }
 
     // Update a quiz
-    public static void updateQuiz(QuizTest quizTest) throws Exception {
+    public static void updateQuiz(QuizTest quiz) throws Exception {
         Class.forName(BaseConnection.nameClass);
         Connection con = DriverManager.getConnection(BaseConnection.url, BaseConnection.username,
                 BaseConnection.password);
         PreparedStatement ps = con.prepareStatement(
-                "UPDATE quiz SET quiz_title = ?, quiz_text = ?, quiz_a = ?, quiz_b = ?, quiz_c = ?, quiz_d = ?, quiz_correctanswer = ? WHERE quiz_id = ?");
-        ps.setString(1, quizTest.getQuizTitle());
-        ps.setString(2, quizTest.getQuizText());
-        ps.setString(3, quizTest.getQuizA());
-        ps.setString(4, quizTest.getQuizB());
-        ps.setString(5, quizTest.getQuizC());
-        ps.setString(6, quizTest.getQuizD());
-        ps.setString(7, quizTest.getQuizCorrectanswer());
-        ps.setInt(8, quizTest.getQuizID());
+                "UPDATE quiz SET quiz_title = ?, quiz_text = ?, quiz_a = ?, quiz_b = ?, quiz_c = ?, quiz_d = ?, quiz_correctanswer = ?, test_id = ? WHERE quiz_id = ?");
+        ps.setString(1, quiz.getQuizTitle());
+        ps.setString(2, quiz.getQuizText());
+        ps.setString(3, quiz.getQuizA());
+        ps.setString(4, quiz.getQuizB());
+        ps.setString(5, quiz.getQuizC());
+        ps.setString(6, quiz.getQuizD());
+        ps.setString(7, quiz.getQuizCorrectanswer());
+        ps.setInt(8, quiz.getTest().getTestID());
+        ps.setInt(9, quiz.getQuizID());
         ps.executeUpdate();
         con.close();
         ps.close();
     }
 
-    // GETQUIZBYNAME
-    public static QuizTest getQuizbyName(String title) throws ClassNotFoundException, SQLException {
+    // GET QUIZ BY NAME
+    public QuizTest getQuizByName(String title) throws Exception {
         Class.forName(BaseConnection.nameClass);
         Connection con = DriverManager.getConnection(BaseConnection.url, BaseConnection.username,
                 BaseConnection.password);
-        PreparedStatement ps = con.prepareStatement("select * from `quiz` where quiz_title = ?");
+        PreparedStatement ps = con.prepareStatement("SELECT * FROM quiz WHERE quiz_title = ?");
         ps.setString(1, title);
         ResultSet rs = ps.executeQuery();
-
-        rs.next();
+        
+        QuizTest quizTest = null;
+        if (rs.next()) {
             int quizID = rs.getInt("quiz_id");
             String quizTitle = rs.getString("quiz_title");
             String quizText = rs.getString("quiz_text");
+            String quizA = rs.getString("quiz_a");
+            String quizB = rs.getString("quiz_b");
+            String quizC = rs.getString("quiz_c");
+            String quizD = rs.getString("quiz_d");
             String quizCorrectAnswer = rs.getString("quiz_correctanswer");
-            String quizA = rs.getString("quiz_A");
-            String quizB = rs.getString("quiz_B");
-            String quizC = rs.getString("quiz_C");
-            String quizD = rs.getString("quiz_D");
-            QuizTest quiz = new QuizTest(quizID, quizTitle, quizText, quizCorrectAnswer, quizA, quizB, quizC, quizD);
-            con.close();
-            rs.close();
-            ps.close();
-            return quiz;
-        } 
+            int testID = rs.getInt("test_id");
+
+            Test test = testRepo.getTestByID(testID);
+
+            quizTest = new QuizTest(quizID, quizTitle, quizText, quizA, quizB, quizC, quizD, quizCorrectAnswer, test);
+        }
+        con.close();
+        ps.close();
+        rs.close();
+        return quizTest;
     }
+}

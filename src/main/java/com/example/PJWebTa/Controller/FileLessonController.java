@@ -111,7 +111,7 @@ public class FileLessonController {
     }
     @GetMapping("/checkViewFile")
     public String checkViewFile(Model model) {
-        // Truyền đường dẫn của file PDF vào Model
+        // Truyền đường dẫn của file PDF vào Modelx`
         // model.addAttribute("pdfFilePath", "/view-pdf");  // Sử dụng "/view-pdf" để hiển thị trong iframe
         return "Lesson/ViewFileDetail";  // Trả về view HTML
     }
@@ -125,9 +125,6 @@ public class FileLessonController {
     }
     
     
-    
-
-
     // Trả về file PDF
     @GetMapping("/FilesPDF/{fileName:.+}")
     public void servePdf(@PathVariable String fileName, HttpServletResponse response) throws IOException {

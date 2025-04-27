@@ -14,9 +14,10 @@ public class QuizTest {
     private int quizID;
     private String quizTitle;
     private String quizText;
-    private String quizCorrectanswer;
     private String quizA;
     private String quizB;
     private String quizC;
     private String quizD;
+    private String quizCorrectanswer;
+    private Test test;
 }
