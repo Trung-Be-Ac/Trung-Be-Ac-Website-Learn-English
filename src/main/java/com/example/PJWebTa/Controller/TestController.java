@@ -58,7 +58,7 @@ public class TestController {
 
         Lesson lesson = lessonRepo.getLessonbyID(lessonID);
         Test test = new Test(0, testName, lesson, testQuestionType, java.time.LocalTime.parse(testTime));
-        TestRepo.AddTest();
+        TestRepo.AddTest(test);
 
         return "redirect:/AllTest";
     }
