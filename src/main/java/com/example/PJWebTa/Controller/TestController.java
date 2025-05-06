@@ -29,7 +29,7 @@ public class TestController {
     public String viewTestDetail(@PathVariable("testID") int testID, Model model) throws Exception {
         Test test = testRepo.getTestByID(testID);
         model.addAttribute("TestDetail", test);
-        return "Test/TestDetail"; 
+        return "Testt/TestDetail"; 
     }
 
     // View All Tests
@@ -37,7 +37,7 @@ public class TestController {
     public String viewAllTests(Model model) throws Exception {
         ArrayList<Test> allTests = testRepo.getAllTests();
         model.addAttribute("AllTests", allTests);
-        return "Test/TestMain"; 
+        return "Testt/TestMain"; 
     }
 
     // Create Test
@@ -45,7 +45,7 @@ public class TestController {
     public String pageCreateTest(Model model) throws Exception {
         ArrayList<Lesson> allLessons = lessonRepo.viewAllLessons();
         model.addAttribute("AllLessons", allLessons);
-        return "Test/CreateTest";  
+        return "Testt/CreateTest";  
     }
 
     @PostMapping("/createTest")
@@ -70,7 +70,7 @@ public class TestController {
         ArrayList<Lesson> allLessons = lessonRepo.viewAllLessons();
         model.addAttribute("Test", test);
         model.addAttribute("AllLessons", allLessons);
-        return "Test/TestEdit"; 
+        return "Testt/TestEdit"; 
     }
     @PostMapping("/editTest")
     public String editTest(

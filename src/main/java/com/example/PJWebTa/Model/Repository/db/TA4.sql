@@ -86,12 +86,12 @@ lesson_id int primary key auto_increment,
 course_id int,
 user_id int,
 lesson_description text,
-lesson_name varchar(50),
+lesson_name varchar(50) unique,
 lesson_status boolean default 0, 
 foreign key (course_id) references course(course_id)
 );
-ALTER TABLE lesson ADD COLUMN lesson_link text;
-ALTER TABLE lesson CHANGE lesson_link lesson_topic text;
+ALTER TABLE lesson
+ADD CONSTRAINT unique_lesson_name UNIQUE (lesson_name);
 
 select * from lesson;
 update lesson set lesson_status = 1 where course_id = ?; 
@@ -146,17 +146,18 @@ values
 (4, 4, 92.0, 'Excelling'),
 (5, 5, 98.0, 'Mastering');
 -- -- --
-create table test(
-test_id int primary key auto_increment,
-test_name varchar (100),
-lesson_id int,
-test_questiontype varchar(100),
-test_timelimit time,
-foreign key (lesson_id) references lesson(lesson_id)
+CREATE TABLE test (
+  test_id INT PRIMARY KEY AUTO_INCREMENT,
+  test_name VARCHAR(100),
+  lesson_id INT,
+  test_questiontype VARCHAR(100),
+  test_timelimit TIME,
+  FOREIGN KEY (lesson_id) REFERENCES lesson(lesson_id)
 );
 select * from test;
-
-insert into test (test_name,lesson_id,test_questiontype,test_timelimit) values (?,?,?,?,?);
+INSERT INTO test (test_name, lesson_id, test_questiontype, test_timelimit)
+VALUES ('Test number 1', 11, 'Multiple Choice', '00:30:00');
+insert into test (test_name,lesson_id,test_questiontype,test_timelimit) values (?,1,?,?);
 select * from test where test_id = ?;
 update test set test_name = ?,quiz_id= ?,lesson_id= ?,test_questiontype= ?,test_timelimit = ? where test_id = ?;
 delete from test where test_id=?;
