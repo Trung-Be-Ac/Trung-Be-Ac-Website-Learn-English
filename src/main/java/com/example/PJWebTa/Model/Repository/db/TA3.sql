@@ -13,7 +13,7 @@ user_picture text,
 username varchar(50),
 `password` varchar(50)
 );
--- a b c c c c d d d d
+-- a b c c c c d d d d e
 select * from `user`;
 select * from `user` where user_id = ?;
 update `user` set user_name=?, user_email=?, user_level=?,user_datejoined=?,user_role=?,user_type=?,user_picture= ? where user_id = ? ;

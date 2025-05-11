@@ -7,6 +7,7 @@ import com.example.PJWebTa.Model.Repository.LessonRepo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -141,4 +142,28 @@ public class FileLessonController {
             response.sendError(404, "File not found");
         }
     }
+
+    @GetMapping("/downloadFile/{fileId}")
+public ResponseEntity<Resource> downloadFile(@PathVariable int fileId) throws Exception {
+    Files file = fileLessonRepo.getFileByID(fileId);
+    if (file == null) {
+        return ResponseEntity.notFound().build();
+    }
+
+    String filePath = System.getProperty("user.dir") + "/src/main/resources/static/" + file.getFilePath();
+    File downloadFile = new File(filePath);
+
+    if (!downloadFile.exists()) {
+        return ResponseEntity.notFound().build();
+    }
+
+    InputStreamResource resource = new InputStreamResource(new FileInputStream(downloadFile));
+
+    return ResponseEntity.ok()
+            .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFileName() + "\"")
+            .contentLength(downloadFile.length())
+            .contentType(MediaType.APPLICATION_OCTET_STREAM)
+            .body(resource);
+}
+
 }

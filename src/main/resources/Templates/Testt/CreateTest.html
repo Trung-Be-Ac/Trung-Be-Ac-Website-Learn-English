@@ -1,11 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-    
+    <form th:action="@{/createTest}" method="post">
+        <input type="text" name="testName" placeholder="Input Name" />
+        <select name="lessonID">
+            <option th:each="lesson : ${AllLessons}" th:value="${lesson.lessonID}" th:text="${lesson.lessonName}">
+            </option>
+        </select>
+        <input type="text" name="testQuestionType" placeholder="Type of Question">
+        <input type="time" name="testTime" placeholder="Time" >
+        <button type="submit">Done !!</button>
+    </form>
 </body>
+
 </html>

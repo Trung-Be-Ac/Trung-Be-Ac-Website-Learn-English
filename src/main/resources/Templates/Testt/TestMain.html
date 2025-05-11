@@ -1,31 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=`, initial-scale=1.0">
     <title>Test Main Page</title>
 </head>
+
 <body>
     <h1> List All Test</h1>
 
+    <a th:href="@{/CreateTest}">Create test</a>
+
     <table border="5">
         <tr>
-            <td>Test Main day5 ID</td>
+            <td style="display: none;">Test Main day5 ID</td>
             <td>Test Name </td>
-            <td>Lesson ID</td>
+            <td style="display: none;">Lesson ID </td>
             <td>Question Type</td>
             <td>Time</td>
-            <td>Action</td>
+            <td style="text-align: center;">Action</td>
         </tr>
         <!-- ====== -->
-        <tr th:each = "Test : ${AllTests}">
-            <td th:text="Test.testID"></td>
-            <td th:text="Test.testName"></td>
-            <td th:text="Test.lesson.lessonID"></td>
-            <td th:text="Test.testQuestionType"></td>
-            <td th:text="Test.testTime"></td>
-            <td><a href="">View Deatail</a></td>
+        <tr th:each="Test : ${AllTests}">
+            <td style="display: none;" th:text="${Test.testID}"></td>
+            <td th:text="${Test.testName}"></td>
+            <td style="display: none;" th:text="${Test.lesson.lessonID}"></td>
+            <td th:text="${Test.testQuestionType}"></td>
+            <td th:text="${Test.testTime}"></td>
+            <td><a href="">
+                    Take the test</a> <a th:href="@{/editTest}">Edit Test</a></td>
         </tr>
     </table>
 </body>
+
 </html>

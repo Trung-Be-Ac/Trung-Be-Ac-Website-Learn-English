@@ -1,5 +1,6 @@
 package com.example.PJWebTa.Controller;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,11 +54,12 @@ public class TestController {
             @RequestParam("testName") String testName,
             @RequestParam("lessonID") int lessonID,
             @RequestParam("testQuestionType") String testQuestionType,
-            @RequestParam("testTime") String testTime,
+            @RequestParam("testTime") LocalTime testTime,
             Model model) throws Exception {
+                // LocalTime testTime
 
         Lesson lesson = lessonRepo.getLessonbyID(lessonID);
-        Test test = new Test(0, testName, lesson, testQuestionType, java.time.LocalTime.parse(testTime));
+        Test test = new Test(0, testName, lesson, testQuestionType, testTime);
         TestRepo.AddTest(test);
 
         return "redirect:/AllTest";
@@ -78,10 +80,10 @@ public class TestController {
             @RequestParam("testName") String testName,
             @RequestParam("lessonID") int lessonID,
             @RequestParam("testQuestionType") String testQuestionType,
-            @RequestParam("testTime") String testTime) throws Exception {
+            @RequestParam("testTime") LocalTime testTime) throws Exception {
 
         Lesson lesson = lessonRepo.getLessonbyID(lessonID);
-        TestRepo.UpdateTest(testName, lesson, testQuestionType, java.time.LocalTime.parse(testTime), testID);
+        TestRepo.UpdateTest(testName, lesson, testQuestionType, testTime, testID);
 
         return "redirect:/TestDetail/" + testID;
     }
