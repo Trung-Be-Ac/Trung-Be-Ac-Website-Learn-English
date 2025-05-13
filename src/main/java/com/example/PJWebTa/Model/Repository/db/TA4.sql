@@ -105,7 +105,7 @@ values
 (4, 2, 'Learning common idiomatic expressions in English for everyday use.', 'Lesson 3: Idioms', 0),
 (4, 2, 'Writing clear and professional emails for various purposes.', 'Lesson 4: Business Writing', 0),
 (4, 2, 'Common English phrases for communication in everyday situations.', 'Lesson 5: Travel Phrases', 0);
-
+-- 
 INSERT INTO lesson (course_id, user_id, lesson_description, lesson_name, lesson_status,lesson_link) 
 VALUES 
 (6, 4, 'Introduction to the English with Reading.', 'Lesson 1: Reading', 0),

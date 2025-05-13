@@ -48,6 +48,7 @@ public class LoginSignupController {
         httpSession.removeAttribute("LoginSuccess");
         return "redirect:/";
     }
+    
 
     // Signup
     @GetMapping("/Signup")
