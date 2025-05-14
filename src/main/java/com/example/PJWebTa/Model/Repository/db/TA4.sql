@@ -98,7 +98,7 @@ update lesson set lesson_status = 1 where course_id = ?;
 update lesson set lesson_topic = ? where course_id = ?;
 select * from lesson where lesson_id = ?;
 delete from lesson where lesson_id=?;
-insert into lesson (course_id, user_id, lesson_description, lesson_name,lesson_link)
+ins-+ert into lesson (course_id, user_id, lesson_description, lesson_name,lesson_link)
 values 
 (4, 2, 'Introduction to the English alphabet and basic pronunciation.', 'Lesson 1: Alphabet', 0),
 (4, 2, 'Using modal verbs to express ability, permission, and necessity.', 'Lesson 2: Modal Verbs', 0),
@@ -112,7 +112,7 @@ VALUES
 (6, 4, 'Introduction to the English with Writing.', 'Lesson 2: Writing', 0),
 (6, 4, 'Introduction to the English with Listening.', 'Lesson 3: Listening', 0);
 
--- -- -- --
+-- -- 
 CREATE TABLE files (
     id INT AUTO_INCREMENT PRIMARY KEY,
     lesson_id INT NOT NULL,
