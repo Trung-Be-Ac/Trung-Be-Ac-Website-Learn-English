@@ -236,3 +236,66 @@ body {
     color: #007bff;
     text-decoration: none;
 }
+
+/* Footer */
+.custom-footer {
+  background-color: #231A80;
+  color: white;
+  padding: 20px 40px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+.footer-top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255,255,255,0.3);
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  
+}
+
+.footer-logo img {
+   width: 140px; 
+height: auto; 
+}
+
+.footer-links {
+  flex: 1;
+  margin: 0 20px;
+  font-size: 13px;
+}
+
+.footer-links a {
+  color: white;
+  text-decoration: none;
+  margin: 0 5px;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+.footer-social a {
+  color: white;
+  margin-left: 10px;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+.footer-social a:hover {
+  color: #d6f8e3; /* Màu xanh nhạt khi hover */
+}
+
+.footer-bottom p {
+  margin: 4px 0;
+  font-size: 12px;
+}
