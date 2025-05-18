@@ -35,7 +35,7 @@ public class FileLessonController {
 
     // Đường dẫn thư mục lưu file (không dùng getRealPath nữa)
     private final String uploadFolder = "src/main/resources/FilesPDF/";
-    private final String uploadFolder2= "target/classes/static/FilesPDF/";
+    private final String uploadFolder2 = "target/classes/static/FilesPDF/";
 
     // Hiện form upload
     @GetMapping("/addFilesLesson")
@@ -87,35 +87,34 @@ public class FileLessonController {
     public String deleteFile(@RequestParam("fileId") int fileId, @RequestParam("lessonId") int lessonId)
             throws Exception {
         fileLessonRepo.deleteFileById(fileId);
-        return "redirect:/Course";
+        return "redirect:/LessonDetail/" + lessonId;
     }
 
     // Xem chi tiết file
     @GetMapping("/viewFileDetail/{fileId}")
     public String viewFileDetailPage(@PathVariable int fileId, Model model) throws Exception {
         Files file = fileLessonRepo.getFileByID(fileId);
-    
+
         if (file == null) {
             return "error";
         }
-    
+
         model.addAttribute("filebyID", file);
-    
-        // Lấy tên file cuối cùng từ đường dẫn tương đối
-        String fullPath = file.getFilePath(); // Ví dụ: FilesPDF/1745042588488_BaiTapTH.pdf
-        String fileName = fullPath.substring(fullPath.lastIndexOf("/") + 1); // chỉ lấy 1745042588488_BaiTapTH.pdf
-    
+
+        String fullPath = file.getFilePath();
+        String fileName = fullPath.substring(fullPath.lastIndexOf("/") + 1);
+
         String pdfUrl = "/FilesPDF/" + fileName;
         model.addAttribute("pdfUrl", pdfUrl);
-    
+
         return "Lesson/ViewFileDetail";
     }
+
     @GetMapping("/checkViewFile")
     public String checkViewFile(Model model) {
-        // Truyền đường dẫn của file PDF vào Modelx`
-        // model.addAttribute("pdfFilePath", "/view-pdf");  // Sử dụng "/view-pdf" để hiển thị trong iframe
-        return "Lesson/ViewFileDetail";  // Trả về view HTML
+        return "Lesson/ViewFileDetail";
     }
+
     @GetMapping("/view-pdf")
     public ResponseEntity<Resource> getPdf() {
         Resource pdfFile = new ClassPathResource("static/FilesPDF/BaiTapTH.pdf");
@@ -124,14 +123,13 @@ public class FileLessonController {
                 .contentType(MediaType.APPLICATION_PDF)
                 .body(pdfFile);
     }
-    
-    
+
     // Trả về file PDF
     @GetMapping("/FilesPDF/{fileName:.+}")
     public void servePdf(@PathVariable String fileName, HttpServletResponse response) throws IOException {
         String filePath = uploadFolder2 + fileName;
         File file = new File(filePath);
-    
+
         if (file.exists()) {
             response.setContentType("application/pdf");
             response.setHeader("Content-Disposition", "inline; filename=\"" + fileName + "\"");
@@ -144,26 +142,26 @@ public class FileLessonController {
     }
 
     @GetMapping("/downloadFile/{fileId}")
-public ResponseEntity<Resource> downloadFile(@PathVariable int fileId) throws Exception {
-    Files file = fileLessonRepo.getFileByID(fileId);
-    if (file == null) {
-        return ResponseEntity.notFound().build();
+    public ResponseEntity<Resource> downloadFile(@PathVariable int fileId) throws Exception {
+        Files file = fileLessonRepo.getFileByID(fileId);
+        if (file == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        String filePath = System.getProperty("user.dir") + "/src/main/resources/static/" + file.getFilePath();
+        File downloadFile = new File(filePath);
+
+        if (!downloadFile.exists()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        InputStreamResource resource = new InputStreamResource(new FileInputStream(downloadFile));
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFileName() + "\"")
+                .contentLength(downloadFile.length())
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                .body(resource);
     }
-
-    String filePath = System.getProperty("user.dir") + "/src/main/resources/static/" + file.getFilePath();
-    File downloadFile = new File(filePath);
-
-    if (!downloadFile.exists()) {
-        return ResponseEntity.notFound().build();
-    }
-
-    InputStreamResource resource = new InputStreamResource(new FileInputStream(downloadFile));
-
-    return ResponseEntity.ok()
-            .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFileName() + "\"")
-            .contentLength(downloadFile.length())
-            .contentType(MediaType.APPLICATION_OCTET_STREAM)
-            .body(resource);
-}
 
 }
