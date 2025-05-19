@@ -112,7 +112,7 @@ VALUES
 (6, 4, 'Introduction to the English with Writing.', 'Lesson 2: Writing', 0),
 (6, 4, 'Introduction to the English with Listening.', 'Lesson 3: Listening', 0);
 
--- -- 
+--dsd -- 
 CREATE TABLE files (
     id INT AUTO_INCREMENT PRIMARY KEY,
     lesson_id INT NOT NULL,
