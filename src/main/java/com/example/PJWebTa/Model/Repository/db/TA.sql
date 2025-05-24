@@ -27,7 +27,7 @@ values
 ('Đô Thành C', 'DTC@gmail.com', 4, '2024-01-03', 'teacher', true, '.....jpg', 'acc3', 'pass3'),
 ('Phạm Tạ D', 'PTD@gmail.com', 1, '2024-01-04', 'student', false, '.....jpg', 'acc4', 'pass4'),
 ('Phan Mạnh E', 'PME@gmail.com', 2, '2024-01-05', 'student', true, '.....jpg', 'acc5', 'pass5');
--- dadada
+-- dadadadbdb
 create table `process` (
 process_id int primary key auto_increment,
 user_id int,
