@@ -69,8 +69,10 @@ public class TestController {
     @GetMapping("/EditTest/{testID}")
     public String pageEditTest(@PathVariable("testID") int testID, Model model) throws Exception {
         Test test = testRepo.getTestByID(testID);
+        Lesson lesson = test.getLesson();
         ArrayList<Lesson> allLessons = lessonRepo.viewAllLessons();
         model.addAttribute("Test", test);
+        model.addAttribute("Lesson", lesson);
         model.addAttribute("AllLessons", allLessons);
         return "Testt/TestEdit";
     }
@@ -90,7 +92,8 @@ public class TestController {
         model.addAttribute("Test", test);
         model.addAttribute("Lesson", lesson);
         model.addAttribute("AllLessons", allLessons);
-        return "redirect:/TestDetail/" + testID;
+        return "redirect:/AllTest";
+
     }
 
     // Delete Test

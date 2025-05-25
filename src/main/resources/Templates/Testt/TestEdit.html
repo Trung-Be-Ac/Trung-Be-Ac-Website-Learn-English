@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Edit Test</title>
 </head>
+
 <body>
-   <div>Trang Edit Test</div>
+    <div>Trang Edit Test</div>
     <table>
         <tr>
             <td>Test Name</td>
-            <td>Of this Lesson</td>
             <td>Question Type</td>
             <td>Time</td>
-            
+
         </tr>
         <tr>
             <form th:action="@{/editTest}" method="post">
@@ -21,16 +22,13 @@
                 <td>
                     <input type="text" name="testName" placeholder="Test Name" th:value="${Test.testName}">
                 </td>
+                <input type="hidden" name="lessonID" placeholder="Lesson ID" th:value="${Lesson.lessonID}">
                 <td>
-                    <input type="number" name="lessonID" placeholder="Lesson ID" th:value="${Course.courseLevel}">
+                    <input type="text" name="testQuestionType" placeholder="Question Type"
+                        th:value="${Test.testQuestionType}">
                 </td>
                 <td>
-                    <input type="text" name="courseDescription" placeholder="Course Description" 
-                        th:value="${Course.courseDescription}">
-                </td>
-                <td>
-                    <input type="number" name="courseTotallesson" placeholder="Course Total Lessons" 
-                        th:value="${Course.courseTotallessons}">
+                    <input type="time" name="testTime" placeholder="Time" th:value="${Test.testTime}">
                 </td>
                 <td>
                     <button type="submit">Save Change</button>
@@ -39,4 +37,5 @@
         </tr>
     </table>
 </body>
+
 </html>
