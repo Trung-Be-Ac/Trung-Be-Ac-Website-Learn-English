@@ -29,7 +29,7 @@
             <td th:text="${Test.testQuestionType}"></td>
             <td th:text="${Test.testTime}"></td>
             <td><a href="">
-                    Take the test</a> <a th:href="@{/EditTest/{testID}}">Edit Test</a></td>
+                    Take the test</a> <a th:href="@{/EditTest/{testID}(testID=${Test.testID})}">Edit Test</a></td>
         </tr>
     </table>
 </body>

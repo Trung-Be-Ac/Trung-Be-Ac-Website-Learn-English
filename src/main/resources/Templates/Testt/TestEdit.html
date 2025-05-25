@@ -1,11 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Edit Test</title>
 </head>
 <body>
-    EditTests
+   <div>Trang Edit Test</div>
+    <table>
+        <tr>
+            <td>Test Name</td>
+            <td>Of this Lesson</td>
+            <td>Question Type</td>
+            <td>Time</td>
+            
+        </tr>
+        <tr>
+            <form th:action="@{/editTest}" method="post">
+                <input type="hidden" name="testID" th:value="${Test.testID}">
+                <td>
+                    <input type="text" name="testName" placeholder="Test Name" th:value="${Test.testName}">
+                </td>
+                <td>
+                    <input type="number" name="lessonID" placeholder="Lesson ID" th:value="${Course.courseLevel}">
+                </td>
+                <td>
+                    <input type="text" name="courseDescription" placeholder="Course Description" 
+                        th:value="${Course.courseDescription}">
+                </td>
+                <td>
+                    <input type="number" name="courseTotallesson" placeholder="Course Total Lessons" 
+                        th:value="${Course.courseTotallessons}">
+                </td>
+                <td>
+                    <button type="submit">Save Change</button>
+                </td>
+            </form>
+        </tr>
+    </table>
 </body>
 </html>

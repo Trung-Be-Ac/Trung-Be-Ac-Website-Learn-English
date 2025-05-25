@@ -30,7 +30,7 @@ public class TestController {
     public String viewTestDetail(@PathVariable("testID") int testID, Model model) throws Exception {
         Test test = testRepo.getTestByID(testID);
         model.addAttribute("TestDetail", test);
-        return "Testt/TestDetail"; 
+        return "Testt/TestDetail";
     }
 
     // View All Tests
@@ -38,7 +38,7 @@ public class TestController {
     public String viewAllTests(Model model) throws Exception {
         ArrayList<Test> allTests = testRepo.getAllTests();
         model.addAttribute("AllTests", allTests);
-        return "Testt/TestMain"; 
+        return "Testt/TestMain";
     }
 
     // Create Test
@@ -46,7 +46,7 @@ public class TestController {
     public String pageCreateTest(Model model) throws Exception {
         ArrayList<Lesson> allLessons = lessonRepo.viewAllLessons();
         model.addAttribute("AllLessons", allLessons);
-        return "Testt/CreateTest";  
+        return "Testt/CreateTest";
     }
 
     @PostMapping("/createTest")
@@ -56,7 +56,7 @@ public class TestController {
             @RequestParam("testQuestionType") String testQuestionType,
             @RequestParam("testTime") LocalTime testTime,
             Model model) throws Exception {
-                // LocalTime testTime
+        // LocalTime testTime
 
         Lesson lesson = lessonRepo.getLessonbyID(lessonID);
         Test test = new Test(0, testName, lesson, testQuestionType, testTime);
@@ -72,19 +72,24 @@ public class TestController {
         ArrayList<Lesson> allLessons = lessonRepo.viewAllLessons();
         model.addAttribute("Test", test);
         model.addAttribute("AllLessons", allLessons);
-        return "Testt/TestEdit"; 
+        return "Testt/TestEdit";
     }
+
     @PostMapping("/editTest")
     public String editTest(
             @RequestParam("testID") int testID,
             @RequestParam("testName") String testName,
             @RequestParam("lessonID") int lessonID,
             @RequestParam("testQuestionType") String testQuestionType,
-            @RequestParam("testTime") LocalTime testTime) throws Exception {
+            @RequestParam("testTime") LocalTime testTime, Model model) throws Exception {
 
+        Test test = testRepo.getTestByID(testID);
         Lesson lesson = lessonRepo.getLessonbyID(lessonID);
+        ArrayList<Lesson> allLessons = lessonRepo.viewAllLessons();
         TestRepo.UpdateTest(testName, lesson, testQuestionType, testTime, testID);
-
+        model.addAttribute("Test", test);
+        model.addAttribute("Lesson", lesson);
+        model.addAttribute("AllLessons", allLessons);
         return "redirect:/TestDetail/" + testID;
     }
 
