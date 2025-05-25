@@ -14,7 +14,7 @@
 
     <table border="5">
         <tr>
-            <td style="display: none;">Test Main day5 ID</td>
+            <td style="display: none;">Test Main ID</td>
             <td>Test Name </td>
             <td style="display: none;">Lesson ID </td>
             <td>Question Type</td>
@@ -29,7 +29,7 @@
             <td th:text="${Test.testQuestionType}"></td>
             <td th:text="${Test.testTime}"></td>
             <td><a href="">
-                    Take the test</a> <a th:href="@{/editTest}">Edit Test</a></td>
+                    Take the test</a> <a th:href="@{/EditTest/{testID}}">Edit Test</a></td>
         </tr>
     </table>
 </body>

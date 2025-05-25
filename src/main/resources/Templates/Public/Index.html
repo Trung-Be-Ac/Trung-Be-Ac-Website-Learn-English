@@ -8,7 +8,7 @@
     <link rel="icon" href="\Image\LogoWeb.png" type="image/x-icon">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link th:href="@{/css/index.css}" rel="stylesheet"/>
+    <link th:href="@{/css/index.css}" rel="stylesheet" />
 </head>
 
 <body>
@@ -35,7 +35,11 @@
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/Course}">Explore Course</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/AllTest}">Test & Quiz</a>
+                    </li>
                 </ul>
+
                 <div th:if="${session.LoginSuccess != null}">
                     Wellcome Back <span th:test="${session.LoginSuccess.userName}"></span>
                 </div>
@@ -101,7 +105,7 @@
     <div class="container mt-5">
         <h2 class="fw-bold text-center">All the English skills you need in one place</h2>
         <p class="text-center">From grammar to pronunciation, our courses help you master English effectively.</p>
-    
+
         <div class="d-flex justify-content-center flex-wrap gap-2">
             <span class="category">Grammar</span>
             <span class="category">Vocabulary</span>
@@ -112,13 +116,14 @@
             <span class="category">Business English</span>
         </div>
     </div>
-    
+
     <!-- Course List -->
     <div class="container mt-4">
         <div class="row">
             <div class="col-md-3">
                 <div class="course-card">
-                    <img src="https://cdn.pixabay.com/photo/2020/09/18/21/12/person-5582976_1280.jpg" class="course-img" alt="Course 1">
+                    <img src="https://cdn.pixabay.com/photo/2020/09/18/21/12/person-5582976_1280.jpg" class="course-img"
+                        alt="Course 1">
                     <h5 class="course-title">English for Beginners: Master Basic Grammar & Vocabulary</h5>
                     <p class="course-author">John Smith</p>
                     <p class="course-rating">⭐ 4.8 (10,583)</p>
@@ -127,7 +132,8 @@
             </div>
             <div class="col-md-3">
                 <div class="course-card">
-                    <img src="https://cdn.pixabay.com/photo/2016/11/23/17/18/bed-1853907_1280.jpg" class="course-img" alt="Course 2">
+                    <img src="https://cdn.pixabay.com/photo/2016/11/23/17/18/bed-1853907_1280.jpg" class="course-img"
+                        alt="Course 2">
                     <h5 class="course-title">Perfect Your English Pronunciation & Accent</h5>
                     <p class="course-author">Emma Brown</p>
                     <p class="course-rating">⭐ 4.6 (5,206)</p>
@@ -136,7 +142,8 @@
             </div>
             <div class="col-md-3">
                 <div class="course-card">
-                    <img src="https://cdn.pixabay.com/photo/2017/08/01/00/38/man-2562325_1280.jpg" class="course-img" alt="Course 3">
+                    <img src="https://cdn.pixabay.com/photo/2017/08/01/00/38/man-2562325_1280.jpg" class="course-img"
+                        alt="Course 3">
                     <h5 class="course-title">Improve Your English Speaking & Conversation Skills</h5>
                     <p class="course-author">James Lee</p>
                     <p class="course-rating">⭐ 4.7 (2,341)</p>
@@ -145,7 +152,8 @@
             </div>
             <div class="col-md-3">
                 <div class="course-card">
-                    <img src="https://cdn.pixabay.com/photo/2015/07/17/22/43/student-849825_1280.jpg" class="course-img" alt="Course 4">
+                    <img src="https://cdn.pixabay.com/photo/2015/07/17/22/43/student-849825_1280.jpg" class="course-img"
+                        alt="Course 4">
                     <h5 class="course-title">Business English: Communicate Professionally in English</h5>
                     <p class="course-author">Sarah Johnson</p>
                     <p class="course-rating">⭐ 4.9 (3,278)</p>
@@ -160,9 +168,11 @@
         <div class="row mt-4">
             <div class="col-md-3">
                 <div class="testimonial-card">
-                    <p>"This platform transformed my English! The interactive lessons and real-life conversations made learning so much easier."</p>
+                    <p>"This platform transformed my English! The interactive lessons and real-life conversations made
+                        learning so much easier."</p>
                     <div class="testimonial-info">
-                        <img src="https://kenh14cdn.com/thumb_w/660/2019/1/31/khoa-hoc-da-chung-minh-ngam-trai-dep-co-the-giup-cai-thien-tri-nho-cua-ban-mot-cach-dang-ke-day-1-1548941717982663756446.jpg" alt="User 1" style="height: 50px;width:55px;">
+                        <img src="https://kenh14cdn.com/thumb_w/660/2019/1/31/khoa-hoc-da-chung-minh-ngam-trai-dep-co-the-giup-cai-thien-tri-nho-cua-ban-mot-cach-dang-ke-day-1-1548941717982663756446.jpg"
+                            alt="User 1" style="height: 50px;width:55px;">
                         <div>
                             <strong>Hoang Trung</strong>
                             <span>University Student</span>
@@ -173,9 +183,11 @@
             </div>
             <div class="col-md-3">
                 <div class="testimonial-card">
-                    <p>"The pronunciation exercises are fantastic! I feel much more confident speaking English now. Thank You AceYourEnglish !"</p>
+                    <p>"The pronunciation exercises are fantastic! I feel much more confident speaking English now.
+                        Thank You AceYourEnglish !"</p>
                     <div class="testimonial-info">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Yen_Bai_-_dogs_-_P1390010.JPG/1200px-Yen_Bai_-_dogs_-_P1390010.JPG" alt="User 2" style="height: 50px;width:55px;">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Yen_Bai_-_dogs_-_P1390010.JPG/1200px-Yen_Bai_-_dogs_-_P1390010.JPG"
+                            alt="User 2" style="height: 50px;width:55px;">
                         <div>
                             <strong>Minh Thien</strong>
                             <span>University Student</span>
@@ -186,9 +198,11 @@
             </div>
             <div class="col-md-3">
                 <div class="testimonial-card">
-                    <p>"Thanks to this site, I passed my English proficiency test with flying colors! The structured lessons were a huge help."</p>
+                    <p>"Thanks to this site, I passed my English proficiency test with flying colors! The structured
+                        lessons were a huge help."</p>
                     <div class="testimonial-info">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTagLIyB4ejzpQpnjGNUZCMlgRBT0Xdoy8WGw&s" alt="User 3" style="height: 50px;width:55px;">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTagLIyB4ejzpQpnjGNUZCMlgRBT0Xdoy8WGw&s"
+                            alt="User 3" style="height: 50px;width:55px;">
                         <div>
                             <strong>Thanh Vinh</strong>
                             <span>Software Developer</span>
@@ -199,9 +213,11 @@
             </div>
             <div class="col-md-3">
                 <div class="testimonial-card">
-                    <p>"I love the writing workshops! My grammar and writing skills have improved so much since I started learning here."</p>
+                    <p>"I love the writing workshops! My grammar and writing skills have improved so much since I
+                        started learning here."</p>
                     <div class="testimonial-info">
-                        <img src="https://cdn-media.sforum.vn/storage/app/media/ctvseo_14/nhan-vat-dep-trai-nhat-anime/nhan-vat-dep-trai-nhat-anime-1.jpg" alt="User 4" style="height: 50px;width:55px;">
+                        <img src="https://cdn-media.sforum.vn/storage/app/media/ctvseo_14/nhan-vat-dep-trai-nhat-anime/nhan-vat-dep-trai-nhat-anime-1.jpg"
+                            alt="User 4" style="height: 50px;width:55px;">
                         <div>
                             <strong>An Nguyen</strong>
                             <span>Business Consultant</span>
@@ -212,42 +228,166 @@
             </div>
         </div>
     </section>
-<!-- FooterFooter -->
+
+    <!-- Features Section -->
+    <section class="features-section text-white py-5" style="background-color: #231A80;">
+        <div class="container">
+            <h2 class="text-center fw-bold mb-4">Our Platform Features</h2>
+            <div class="row text-center">
+                <div class="col-md-3">
+                    <i class="bi bi-journal-check display-5 mb-3"></i>
+                    <h5>Verified Courses</h5>
+                    <p>Curated by language professionals.</p>
+                </div>
+                <div class="col-md-3">
+                    <i class="bi bi-laptop display-5 mb-3"></i>
+                    <h5>100% Online</h5>
+                    <p>Learn anytime, anywhere.</p>
+                </div>
+                <div class="col-md-3">
+                    <i class="bi bi-person-video display-5 mb-3"></i>
+                    <h5>Expert Tutors</h5>
+                    <p>With years of teaching experience.</p>
+                </div>
+                <div class="col-md-3">
+                    <i class="bi bi-award display-5 mb-3"></i>
+                    <h5>Certificates</h5>
+                    <p>Prove your language progress.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- About Platform Section -->
+    <section class="about-section container mt-5 mb-5">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <img src="https://i.pinimg.com/originals/b0/7c/0f/b07c0fc116d1868db07a8bbc2d79aab9.gif" class="img-fluid rounded" alt="About Us GIF">
+            </div>
+
+            <div class="col-md-6">
+                <h2 class="fw-bold">Why Choose AceYourEnglish?</h2>
+                <p>We provide high-quality English courses designed by experts to help you achieve your personal,
+                    academic, and professional goals.</p>
+                <ul>
+                    <li>Interactive lessons with real-world examples</li>
+                    <li>Flexible schedule and affordable pricing</li>
+                    <li>Certificates upon course completion</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Request Feature Section -->
+    <section class="request-section py-5" style="background: linear-gradient(135deg, #231A80, #3F51B5); color: white;">
+        <div class="container text-center">
+            <h2 class="fw-bold mb-3">Have an Idea or Request?</h2>
+            <p class="mb-4">Let us know what you'd like to see on this website. We're always improving!</p>
+            <form id="requestForm" class="d-flex justify-content-center">
+                <div class="col-12 col-md-8 col-lg-6">
+                    <textarea id="requestText" class="form-control mb-3" rows="6"
+                        style="font-size: 1.1rem; text-align: center; width: 100%;"
+                        placeholder="Write your request or suggestion here..." required></textarea>
+                    <button type="submit" class="btn btn-warning fw-bold w-100 py-2">Send Request</button>
+                </div>
+            </form>
+            <div id="successMessage" class="mt-3 fw-bold" style="display:none; color: #FFD700;">Đã gửi thành công!</div>
+        </div>
+    </section>
+
+
+    <!-- FAQ Section -->
+    <section class="faq-section container py-5">
+        <h2 class="fw-bold text-center mb-4">Frequently Asked Questions</h2>
+        <div class="accordion" id="faqAccordion">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="faq1">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapse1">
+                        Are the courses beginner friendly?
+                    </button>
+                </h2>
+                <div id="collapse1" class="accordion-collapse collapse show">
+                    <div class="accordion-body">
+                        Yes! We have courses tailored for beginners all the way to advanced learners.
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="faq2">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapse2">
+                        Do I get a certificate after completing a course?
+                    </button>
+                </h2>
+                <div id="collapse2" class="accordion-collapse collapse">
+                    <div class="accordion-body">
+                        Absolutely! Each course offers a certificate upon successful completion.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FooterFooter -->
     <footer class="custom-footer">
-  <div class="footer-top">
-    <div class="footer-logo">
-      <img src="Image\main-logo-black-3.png" alt="Logo" />
-      <span><strong>AceYourEnglish</strong></span>
-    </div>
-    <div class="footer-links">
-      <a href="#">About us</a> |
-      <a href="#">Terms of use</a> |
-      <a href="#">Accessibility</a> |
-      <a href="#">Privacy and cookies</a> |
-      <a href="#">Affiliate programme</a> |
-      <a href="#">Getting started</a> |
-      <a href="#">Frequently asked questions</a> |
-      <a href="#">Contact us</a> |
-      <a href="#">Site map</a>
-    </div>
-    <div class="footer-social">
-      <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-      <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-      <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-      <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p><strong>© AceYourEnglish VietNam</strong></p>
-    <p>VietNam international organisation for cultural relations and educational opportunities.</p>
-    <p>A registered charity: 209131 (VinhCuBuu) SC037733 (ThienJolibee).</p>
-  </div>
-</footer>
+        <div class="footer-top">
+            <div class="footer-logo">
+                <img src="Image\main-logo-black-3.png" alt="Logo" />
+                <span><strong>AceYourEnglish</strong></span>
+            </div>
+            <div class="footer-links">
+                <a href="#">About us</a> |
+                <a href="#">Terms of use</a> |
+                <a href="#">Accessibility</a> |
+                <a href="#">Privacy and cookies</a> |
+                <a href="#">Affiliate programme</a> |
+                <a href="#">Getting started</a> |
+                <a href="#">Frequently asked questions</a> |
+                <a href="#">Contact us</a> |
+                <a href="#">Site map</a>
+                <img src="https://i0.wp.com/www.printmag.com/wp-content/uploads/2021/02/4cbe8d_f1ed2800a49649848102c68fc5a66e53mv2.gif?fit=476%2C280&ssl=1" style="height: 10%;width: 10%;">
+            </div>
+            <div class="footer-social">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p><strong>© AceYourEnglish VietNam</strong></p>
+            <p>VietNam international organisation for cultural relations and educational opportunities.</p>
+            <p>A registered charity: 209131 (VinhCuBuu) SC037733 (ThienJolibee).</p>
+        </div>
+    </footer>
 
 
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        const form = document.getElementById('requestForm');
+        const successMessage = document.getElementById('successMessage');
+        const textarea = document.getElementById('requestText');
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+
+            successMessage.style.display = 'block';
+
+            textarea.value = '';
+
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+            }, 3000);
+        });
+    </script>
+
 </body>
 
 </html>
