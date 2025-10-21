@@ -59,6 +59,7 @@ public class CourseController {
         Course course = new Course(0, name, level, description, 0, 0, 0.0, user);
         courseRepo.AddCourse(course);
         return "redirect:/Course";
+        
 
     }
 

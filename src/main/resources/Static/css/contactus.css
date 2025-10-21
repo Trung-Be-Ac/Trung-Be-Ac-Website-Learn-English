@@ -1,81 +1,89 @@
-/* General Styles */
+/* Font mặc định */
 body {
-    font-family: Arial, sans-serif;
     margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
+    font-family: 'Poppins', sans-serif;
+    background: #f5f7fa;
+    color: #333;
 }
 
+/* Container */
 .container {
-    max-width: 1200px;
+    max-width: 1100px;
     margin: 0 auto;
     padding: 20px;
-    background-color: #fff;
 }
 
 /* Header */
-header {
+.header {
     text-align: center;
-    padding: 40px 0;
-    background-color: #007bff;
+    padding: 40px 20px 20px;
+    background: linear-gradient(135deg, #4e73df, #231A80);
     color: white;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
-
-header h1 {
+.header h1 {
     margin: 0;
-    font-size: 2.5em;
+    font-size: 2.2rem;
+    font-weight: 600;
 }
-
-header p {
+.header p {
     margin-top: 10px;
-    font-size: 1.2em;
+    font-size: 1.1rem;
 }
 
-/* Main Content */
+/* Content */
 .content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+/* Card chung */
+.card {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 18px rgba(0,0,0,0.12);
+}
+.card h2 {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    color: #4e73df;
     display: flex;
-    justify-content: space-between;
-    margin-top: 30px;
+    align-items: center;
+    gap: 10px;
 }
-
-.contact-info, .social-media, .terms-policy {
-    width: 30%;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-}
-
-.contact-info h2, .social-media h2, .terms-policy h2 {
-    text-align: center;
-    color: #007bff;
-}
-
-.contact-info p, .social-media a, .terms-policy a {
-    font-size: 1.1em;
+.card p {
     margin: 10px 0;
-    text-align: center;
+    font-size: 1rem;
 }
 
-.social-media a {
-    display: inline-block;
-    margin: 5px 10px;
+/* Links */
+a {
+    color: #1cc88a;
     text-decoration: none;
-    font-size: 1.2em;
+    font-weight: 500;
+    transition: color 0.2s ease;
 }
-
-.social-media a i {
-    margin-right: 8px;
+a:hover {
+    color: #17a673;
+    text-decoration: underline;
 }
 
 /* Footer */
-footer {
+.footer {
     text-align: center;
-    margin-top: 40px;
     padding: 20px;
-    background-color: #007bff;
-    color: white;
-}
-
-footer p {
-    margin: 0;
+    font-size: 0.9rem;
+    color: #555;
+    border-top: 1px solid #ddd;
+    margin-top: 20px;
 }

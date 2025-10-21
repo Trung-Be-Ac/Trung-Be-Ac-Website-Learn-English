@@ -187,5 +187,5 @@ SELECT u.user_name
 FROM quiz q
 JOIN `user` u ON q.user_id = u.user_id
 WHERE q.quiz_id = ?;
-- - - - - - ----
+- - - - - - ----,,
 

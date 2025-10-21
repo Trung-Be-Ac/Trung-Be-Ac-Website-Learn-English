@@ -1,49 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AceYourEnglish - Contact Us</title>
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <!-- Custom CSS -->
     <link th:href="@{/css/contactus.css}" rel="stylesheet"/>
 </head>
 <body>
     <div class="container">
         <!-- Header -->
-        <header>
+        <header class="header">
             <h1>AceYourEnglish</h1>
-            <p>Contact Us</p>
+            <p>Get in Touch with Us</p>
         </header>
 
         <!-- Main Content -->
-        <div class="content">
+        <main class="content">
             <!-- Contact Info -->
-            <div class="contact-info">
-                <h2>Contact Info</h2>
-                <p>Email: <a href="mailto:contact@aceyourenglish.com">contact@aceyourenglish.com</a></p>
-                <p>Phone: 123456789</p>
-            </div>
+            <section class="card contact-info">
+                <h2><i class="fa-solid fa-envelope"></i> Contact Info</h2>
+                <p><i class="fa-solid fa-at"></i> Email: 
+                    <a href="mailto:contact@aceyourenglish.com">contact@aceyourenglish.com</a>
+                </p>
+                <p><i class="fa-solid fa-phone"></i> Phone: +84 123 456 789</p>
+            </section>.
 
             <!-- Social Media Links -->
-            <div class="social-media">
-                <h2>Follow Us</h2>
-                <a href="https://discord.com/invite/aceyourenglish" target="_blank">
-                    <i class="fab fa-discord"></i> Discord
-                </a>
-                <a href="https://www.facebook.com/AceYourEnglish" target="_blank">
-                    <i class="fab fa-facebook"></i> Facebook
-                </a>
-            </div>
+            <section class="card social-media">
+                <h2><i class="fa-solid fa-share-nodes"></i> Follow Us</h2>
+                <p>
+                    <a href="https://discord.com/invite/aceyourenglish" target="_blank">
+                        <i class="fab fa-discord"></i> Discord
+                    </a>
+                </p>
+                <p>
+                    <a href="https://www.facebook.com/AceYourEnglish" target="_blank">
+                        <i class="fab fa-facebook"></i> Facebook
+                    </a>
+                </p>
+            </section>
 
             <!-- Terms and Policies -->
-            <div class="terms-policy">
-                <h2>Terms & Policies</h2>
-                <p><a href="/terms-of-service">Terms of Service</a></p>
-                <p><a href="/privacy-policy">Privacy Policy</a></p>
-            </div>
-        </div>
+            <section class="card terms-policy">
+                <h2><i class="fa-solid fa-file-contract"></i> Terms & Policies</h2>
+                <p><a href="/terms-of-service"><i class="fa-solid fa-scroll"></i> Terms of Service</a></p>
+                <p><a href="/privacy-policy"><i class="fa-solid fa-shield-halved"></i> Privacy Policy</a></p>
+            </section>
+        </main>
 
         <!-- Footer -->
-        <footer>
+        <footer class="footer">
             <p>&copy; 2024 AceYourEnglish. All Rights Reserved.</p>
         </footer>
     </div>
